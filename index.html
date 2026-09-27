@@ -184,6 +184,23 @@
     </div>
   </footer>
 
+  <!-- Reproductor de publicaciones y videos (sin salir de la página) -->
+  <div class="media" id="media" role="dialog" aria-modal="true" aria-labelledby="mediaTitle" hidden>
+    <div class="media__backdrop" data-mclose></div>
+    <button class="media__nav media__nav--prev" id="mediaPrev" aria-label="Anterior">‹</button>
+    <div class="media__panel">
+      <div class="media__head">
+        <span class="media__net" id="mediaNet"></span>
+        <b class="media__title" id="mediaTitle"></b>
+        <span class="media__count" id="mediaCount"></span>
+        <button class="media__close" data-mclose aria-label="Cerrar">×</button>
+      </div>
+      <div class="media__frame" id="mediaFrame"></div>
+      <a class="media__ext" id="mediaExt" target="_blank" rel="noopener"></a>
+    </div>
+    <button class="media__nav media__nav--next" id="mediaNext" aria-label="Siguiente">›</button>
+  </div>
+
   <!-- Modal -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
     <div class="modal__backdrop" data-close></div>

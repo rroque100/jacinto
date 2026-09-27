@@ -181,19 +181,98 @@
   });
   renderProposals("Todas");
 
-  /* ---------- Redes ---------- */
+  /* ---------- Redes: las publicaciones y videos se abren en un reproductor dentro de la página ---------- */
   const netName = { tiktok: "TikTok", facebook: "Facebook", video: "Facebook Video" };
   const playable = { tiktok: true, video: true };
   $("#socialGrid").innerHTML = S.redes
     .map(
-      (r, i) => `<a class="social social--${esc(r.tipo)} reveal" style="--d:${(i % 3) * 0.1}s" href="${esc(r.url)}" target="_blank" rel="noopener">
+      (r, i) => `<a class="social social--${esc(r.tipo)} reveal" style="--d:${(i % 3) * 0.1}s" href="${esc(r.url)}" target="_blank" rel="noopener" data-media="${i}">
         <div class="social__bg"></div>
-        ${playable[r.tipo] ? '<div class="social__play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></div>' : ""}
+        <div class="social__play">${playable[r.tipo] ? '<svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>' : '<svg viewBox="0 0 24 24" class="social__eye"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>'}</div>
         <span class="social__net">${netName[r.tipo] || "Red social"}</span>
         <span class="social__title">${esc(r.titulo)}</span>
+        <span class="social__hint">${playable[r.tipo] ? "Ver aquí" : "Leer aquí"}</span>
       </a>`
     )
     .join("");
+
+  // Arma la dirección del reproductor oficial (embed) de cada red.
+  const tiktokId = async (r) => {
+    if (r.id) return r.id;
+    const m = r.url.match(/\/video\/(\d+)/);
+    if (m) return m[1];
+    try { // los enlaces cortos (vt.tiktok.com) se resuelven con el oEmbed público de TikTok
+      const ctrl = new AbortController();
+      setTimeout(() => ctrl.abort(), 6000);
+      const res = await fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(r.url)}`, { signal: ctrl.signal });
+      const html = (await res.json()).html || "";
+      return (html.match(/data-video-id="(\d+)"/) || [])[1] || null;
+    } catch { return null; }
+  };
+  const embedSrc = async (r) => {
+    if (r.embed) return r.embed;
+    if (r.tipo === "tiktok") { const id = await tiktokId(r); return id ? `https://www.tiktok.com/embed/v2/${id}?lang=es` : null; }
+    const plugin = r.tipo === "video" ? "video" : "post";
+    return `https://www.facebook.com/plugins/${plugin}.php?href=${encodeURIComponent(r.url)}&show_text=true&width=500&locale=es_LA`;
+  };
+
+  const media = $("#media"), mFrame = $("#mediaFrame");
+  let mIndex = 0, mToken = 0, mLast = null;
+  const showMedia = async (i) => {
+    mIndex = (i + S.redes.length) % S.redes.length;
+    const r = S.redes[mIndex], token = ++mToken;
+    const red = r.tipo === "tiktok" ? "TikTok" : "Facebook";
+    $("#mediaNet").textContent = netName[r.tipo] || "Red social";
+    $("#mediaTitle").textContent = r.titulo;
+    $("#mediaCount").textContent = `${mIndex + 1} / ${S.redes.length}`;
+    $("#mediaExt").href = r.url;
+    $("#mediaExt").textContent = `¿No se ve? Ábrelo en ${red} ↗`;
+    mFrame.className = `media__frame media__frame--${r.tipo}`;
+    mFrame.innerHTML = `<div class="media__loader"><span data-emblem>${emblem()}</span>Cargando…</div>`;
+    const src = await embedSrc(r);
+    if (token !== mToken) return; // el usuario ya pasó a otra publicación
+    if (!src) {
+      mFrame.innerHTML = `<div class="media__loader">No se pudo cargar aquí.<a class="btn btn--small" href="${esc(r.url)}" target="_blank" rel="noopener">Ver en ${red}</a></div>`;
+      return;
+    }
+    const iframe = document.createElement("iframe");
+    iframe.src = src;
+    iframe.title = r.titulo;
+    iframe.allow = "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen";
+    iframe.allowFullscreen = true;
+    iframe.setAttribute("scrolling", "yes");
+    iframe.addEventListener("load", () => mFrame.classList.add("ready"));
+    mFrame.appendChild(iframe);
+  };
+  const openMedia = (i) => {
+    mLast = document.activeElement;
+    media.hidden = false;
+    document.body.style.overflow = "hidden";
+    showMedia(i);
+    $(".media__close", media).focus();
+  };
+  const closeMedia = () => {
+    mToken++;
+    mFrame.innerHTML = ""; // detiene la reproducción
+    media.hidden = true;
+    document.body.style.overflow = "";
+    mLast?.focus();
+  };
+  $("#socialGrid").addEventListener("click", (e) => {
+    const card = e.target.closest("[data-media]");
+    if (!card) return;
+    e.preventDefault();
+    openMedia(+card.dataset.media);
+  });
+  media.addEventListener("click", (e) => { if (e.target.closest("[data-mclose]")) closeMedia(); });
+  $("#mediaPrev").addEventListener("click", () => showMedia(mIndex - 1));
+  $("#mediaNext").addEventListener("click", () => showMedia(mIndex + 1));
+  document.addEventListener("keydown", (e) => {
+    if (media.hidden) return;
+    if (e.key === "Escape") closeMedia();
+    else if (e.key === "ArrowLeft") showMedia(mIndex - 1);
+    else if (e.key === "ArrowRight") showMedia(mIndex + 1);
+  });
 
   /* ---------- Testimonios (slider) ---------- */
   const track = $("#sliderTrack");

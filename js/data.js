@@ -109,7 +109,11 @@ window.SITE = {
     { eje: "Transparencia", titulo: "[Propuesta 6]", texto: "[Explicación breve.]" }
   ],
 
-  // Publicaciones compartidas del candidato
+  // Publicaciones y videos del candidato. Se ven DENTRO de la página con el reproductor oficial
+  // de Facebook / TikTok. Si alguno no carga con el enlace corto de "compartir", abre el enlace,
+  // copia la dirección completa que aparece en el navegador y pégala en "url", por ejemplo:
+  //   Facebook: https://www.facebook.com/<pagina>/posts/<id>  o  https://www.facebook.com/<pagina>/videos/<id>
+  //   TikTok:   https://www.tiktok.com/@<usuario>/video/<id>
   redes: [
     { tipo: "tiktok",   titulo: "Video en TikTok",          url: "https://vt.tiktok.com/ZSV6TVbRD/" },
     { tipo: "facebook", titulo: "Publicación en Facebook",  url: "https://www.facebook.com/share/p/1BmA6NqsLg/" },
