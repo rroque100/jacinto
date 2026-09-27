@@ -1,6 +1,14 @@
-# Jacinto — Sitio web de campaña
+# Jacinto Lima Lucas — Sitio web de campaña
+
+**En Challhuahuacho, ¡Venceremos!**
 
 Página de una sola vista (HTML + CSS + JavaScript puro, sin dependencias) con la historia de vida y la lucha social del candidato.
+
+## Identidad visual
+Tomada de la banderola de campaña (`assets/img/banderola.png`): fondo blanco, rojo `#e3241b`,
+verde hoja `#2f9e36` con contorno `#0f3d1c`, letras negras condensadas (Anton) y el grito
+"¡Venceremos!" en rojo cursiva. El símbolo de las tres hojas se dibuja en SVG desde `js/main.js`
+(función `emblem`) y aparece en el precargador, la barra de navegación, la portada y el pie.
 
 ## Cómo editar el contenido
 Todo el texto, cifras, hitos, luchas, propuestas, testimonios, enlaces y colores están en **`js/data.js`**.

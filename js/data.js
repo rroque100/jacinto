@@ -10,12 +10,15 @@
 window.SITE = {
   candidato: {
     nombre: "Jacinto",
-    apellido: "[Apellido]",
-    cargo: "Candidato a [Cargo] de [Distrito / Provincia / Región]",
+    apellido: "Lima Lucas",
+    lugar: "Challhuahuacho",
+    grito: "¡Venceremos!",                 // grito de campaña (banderola)
+    cargo: "Candidato a la Alcaldía de Challhuahuacho",   // CONFIRMAR el cargo exacto
     partido: "[Nombre del partido o movimiento]",
     numero: "[N.º]",                       // número en la cédula
-    foto: "",                              // ej: "assets/img/candidato.jpg" (vacío = monograma)
-    lema: "La lucha de toda una vida, al servicio de nuestro pueblo",
+    foto: "",                              // ej: "assets/img/candidato.jpg" (vacío = logo de las hojas)
+    banderola: "assets/img/banderola.png", // foto de la banderola de campaña
+    lema: "En Challhuahuacho, la lucha de toda una vida al servicio de nuestro pueblo",
     frasesRotativas: [
       "dirigente social",
       "defensor del pueblo",
@@ -24,11 +27,11 @@ window.SITE = {
     ]
   },
 
-  // Colores de campaña (se aplican como variables CSS)
+  // Colores de campaña tomados de la banderola (rojo, verde hoja, negro)
   colores: {
-    primario: "#e11d48",
-    secundario: "#f59e0b",
-    oscuro: "#0b1020"
+    primario: "#e3241b",
+    secundario: "#2f9e36",
+    oscuro: "#111111"
   },
 
   // Fecha de la elección para la cuenta regresiva (verificar con el JNE/ONPE)

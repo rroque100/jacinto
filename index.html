@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jacinto · Una vida de lucha social</title>
-  <meta name="description" content="Resumen de vida, trayectoria y lucha social del candidato Jacinto.">
-  <meta name="theme-color" content="#0b1020">
+  <title>Jacinto Lima Lucas · ¡Venceremos!</title>
+  <meta name="description" content="Jacinto Lima Lucas: historia de vida y lucha social en Challhuahuacho. ¡Venceremos!">
+  <meta name="theme-color" content="#e3241b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -15,7 +15,8 @@
 
   <!-- Preloader -->
   <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader__name" data-name></div>
+    <div class="preloader__logo" data-emblem></div>
+    <div class="preloader__name" data-fullname></div>
     <div class="preloader__bar"><span></span></div>
   </div>
 
@@ -24,7 +25,7 @@
 
   <!-- Navegación -->
   <header class="nav" id="nav">
-    <a href="#inicio" class="nav__logo" data-fullname-short></a>
+    <a href="#inicio" class="nav__logo"><span class="nav__emblem" data-emblem></span><span data-fullname></span></a>
     <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav__links" id="navLinks">
       <a href="#historia">Historia</a>
@@ -40,11 +41,12 @@
     <!-- HERO -->
     <section class="hero" id="inicio">
       <canvas id="particles" class="hero__canvas" aria-hidden="true"></canvas>
-      <div class="hero__blob hero__blob--a" aria-hidden="true"></div>
-      <div class="hero__blob hero__blob--b" aria-hidden="true"></div>
+      <div class="hero__red" aria-hidden="true"></div>
+      <div class="leaves-fall" id="leavesFall" aria-hidden="true"></div>
       <div class="hero__content">
         <p class="hero__kicker reveal" data-cargo></p>
         <h1 class="hero__title" id="heroTitle" aria-label=""></h1>
+        <p class="grito reveal" data-grito></p>
         <p class="hero__typed reveal">Toda una vida como <span id="typed" class="typed"></span><span class="caret">|</span></p>
         <p class="hero__lema reveal" data-lema></p>
         <div class="hero__cta reveal">
@@ -63,6 +65,15 @@
     <!-- CIFRAS -->
     <section class="stats" id="cifras">
       <div class="container stats__grid" id="stats"></div>
+    </section>
+
+    <!-- BANDEROLA -->
+    <section class="banderola" id="banderola">
+      <div class="container">
+        <figure class="banderola__frame reveal" id="banderolaFrame">
+          <img id="banderolaImg" alt="Banderola de campaña: En Challhuahuacho, Jacinto Lima Lucas, ¡Venceremos!" loading="lazy">
+        </figure>
+      </div>
     </section>
 
     <!-- HISTORIA -->
@@ -150,8 +161,8 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p><strong data-fullname></strong> · <span data-partido></span></p>
-      <p class="footer__vote">Marca el <span data-numero></span></p>
+      <p><strong data-fullname></strong> · <span data-partido></span><br><em class="footer__grito" data-grito></em></p>
+      <p class="footer__vote"><span class="footer__emblem" data-emblem></span> Marca el símbolo · <span data-numero></span></p>
     </div>
   </footer>
 

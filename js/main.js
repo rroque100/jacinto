@@ -10,7 +10,23 @@
 
   const c = S.candidato;
   const fullName = `${c.nombre} ${c.apellido}`.trim();
-  const initials = (c.nombre[0] + (c.apellido.replace(/[^\p{L}]/gu, "")[0] || "")).toUpperCase();
+
+  /* ---------- Emblema de campaña: tres hojas verdes en círculo blanco sobre fondo rojo ---------- */
+  let emblemId = 0;
+  const emblem = () => {
+    const g = `lg${emblemId++}`;
+    const leaf = 'M0 0 C-26 -22 -26 -70 0 -98 C26 -70 26 -22 0 0 Z';
+    const vein = 'M0 -4 L0 -84';
+    const one = (cls, tr) => `<g transform="${tr}"><g class="leaf ${cls}"><path d="${leaf}" fill="url(#${g})" stroke="#0f3d1c" stroke-width="6" stroke-linejoin="round"/><path d="${vein}" stroke="#0f3d1c" stroke-width="4" stroke-linecap="round"/></g></g>`;
+    return `<svg class="emblem" viewBox="0 0 200 200" role="img" aria-label="Símbolo de campaña: tres hojas verdes">
+      <defs><linearGradient id="${g}" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1f7d2a"/><stop offset="1" stop-color="#4cc152"/></linearGradient></defs>
+      <rect width="200" height="200" fill="var(--primary, #e3241b)"/>
+      <circle class="ring" cx="100" cy="100" r="80" fill="#fff"/>
+      ${one("leaf--l", "translate(100 142) rotate(-58) scale(.78)")}
+      ${one("leaf--r", "translate(100 142) rotate(58) scale(.78)")}
+      ${one("leaf--c", "translate(100 142)")}
+    </svg>`;
+  };
 
   /* ---------- Iconos (SVG en línea) ---------- */
   const ICONS = {
@@ -38,8 +54,11 @@
   }
 
   /* ---------- Textos simples ---------- */
-  document.title = `${fullName} · Una vida de lucha social`;
-  $$("[data-name]").forEach((el) => (el.textContent = c.nombre));
+  document.title = `${fullName} · ${c.grito || "Una vida de lucha social"}`;
+  $$("[data-emblem]").forEach((el) => (el.innerHTML = emblem()));
+  $$("[data-grito]").forEach((el) => (el.innerHTML = `<span>${esc(c.grito)}</span>`));
+  if (c.banderola) $("#banderolaImg").src = c.banderola;
+  else $("#banderola").remove();
   $$("[data-fullname]").forEach((el) => (el.textContent = fullName));
   $$("[data-fullname-short]").forEach((el) => (el.textContent = c.nombre));
   $$("[data-cargo]").forEach((el) => (el.textContent = c.cargo));
@@ -50,7 +69,7 @@
   const portrait = (withBadge) => {
     const inner = c.foto
       ? `<div class="photo"><img src="${esc(c.foto)}" alt="${esc(fullName)}" loading="lazy"></div>`
-      : `<div class="monogram" role="img" aria-label="${esc(fullName)}">${esc(initials)}</div>`;
+      : `<div class="portrait-emblem grow">${emblem()}</div>`;
     return inner + (withBadge ? `<div class="badge-num">Marca el<b>${esc(c.numero)}</b></div>` : "");
   };
   $("#heroPortrait").innerHTML = portrait(true);
@@ -66,7 +85,7 @@
     .join("");
 
   /* ---------- Marquesina ---------- */
-  const mq = [c.lema, ...c.frasesRotativas, fullName].map((t) => `<span>${esc(t)}</span>`).join("");
+  const mq = [`${c.lugar} ${c.grito}`, fullName, ...c.frasesRotativas].map((t) => `<span>${esc(t)}</span>`).join("");
   $("#marquee").innerHTML = mq + mq;
 
   /* ---------- Cifras ---------- */
@@ -324,9 +343,11 @@
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const n = Math.min(Math.floor((W * H) / 14000), 110);
-    pts = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, r: Math.random() * 2 + 0.6 }));
+    pts = Array.from({ length: n }, (_, i) => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, r: Math.random() * 2.2 + 1, red: i % 3 === 0 }));
   };
-  const accent = getComputedStyle(document.documentElement).getPropertyValue("--secondary").trim() || "#f59e0b";
+  const css = getComputedStyle(document.documentElement);
+  const accent = css.getPropertyValue("--secondary").trim() || "#2f9e36";
+  const red = css.getPropertyValue("--primary").trim() || "#e3241b";
   const draw = () => {
     ctx.clearRect(0, 0, W, H);
     for (const p of pts) {
@@ -335,12 +356,12 @@
       if (p.y < 0 || p.y > H) p.vy *= -1;
       const dxm = p.x - mouse.x, dym = p.y - mouse.y, dm = Math.hypot(dxm, dym);
       if (dm < 120) { p.x += dxm / dm * 1.5; p.y += dym / dm * 1.5; }
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = "#ffffffb0"; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = p.red ? red : accent; ctx.fill();
     }
     ctx.strokeStyle = accent;
     for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
       const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
-      if (d < 120) { ctx.globalAlpha = (1 - d / 120) * 0.35; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      if (d < 120) { ctx.globalAlpha = (1 - d / 120) * 0.3; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
     }
     ctx.globalAlpha = 1;
     if (heroVisible && !reduced) requestAnimationFrame(draw);
@@ -360,7 +381,7 @@
     cv.width = innerWidth; cv.height = innerHeight;
     document.body.appendChild(cv);
     const cx = cv.getContext("2d");
-    const cols = [getComputedStyle(document.documentElement).getPropertyValue("--primary").trim(), accent, "#ffffff"];
+    const cols = [red, accent, "#111111"];
     const bits = Array.from({ length: 160 }, () => ({ x: innerWidth / 2, y: innerHeight * 0.6, vx: (Math.random() - 0.5) * 16, vy: -Math.random() * 18 - 6, s: Math.random() * 8 + 4, r: Math.random() * 6, c: cols[Math.floor(Math.random() * 3)] }));
     let f = 0;
     const loop = () => {
@@ -371,7 +392,16 @@
     loop();
   }
 
+  /* ---------- Hojas que caen en la portada ---------- */
+  if (!reduced) {
+    $("#leavesFall").innerHTML = Array.from({ length: 14 }, () => {
+      const r = Math.random;
+      return `<i style="left:${(r() * 100).toFixed(1)}%;--s:${(14 + r() * 18).toFixed(0)}px;--t:${(10 + r() * 10).toFixed(1)}s;--delay:${(-r() * 20).toFixed(1)}s;--dx:${((r() - 0.5) * 160).toFixed(0)}px"></i>`;
+    }).join("");
+  }
+
   /* ---------- Salida del preloader ---------- */
+  $(".preloader__logo").classList.add("grow");
   const start = () => {
     $("#preloader").classList.add("done");
     document.body.classList.remove("is-loading");
