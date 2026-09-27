@@ -39,10 +39,10 @@ window.SITE = {
   fechaEleccion: "2026-10-04T07:00:00-05:00",
 
   cifras: [
-    { valor: 25, sufijo: "+", texto: "años de lucha social" },
-    { valor: 40, sufijo: "+", texto: "comunidades acompañadas" },
-    { valor: 1000, sufijo: "+", texto: "familias beneficiadas" },
-    { valor: 12, sufijo: "", texto: "obras gestionadas" }
+    { valor: 4, sufijo: "", texto: "grandes logros junto al pueblo" },
+    { valor: 11, sufijo: "", texto: "dirigentes absueltos en el caso Cotabambas" },
+    { valor: 10, sufijo: "", texto: "años de juicio hasta probar su inocencia" },
+    { valor: 1, sufijo: "", texto: "fallo unánime: inocente" }
   ],
 
   historia: {
