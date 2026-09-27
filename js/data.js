@@ -18,7 +18,6 @@ window.SITE = {
     foto: "assets/img/jacinto.webp",       // PORTADA: foto del candidato (vacío = símbolo)
     fotoSinFondo: true,                    // true si la foto de portada está recortada (fondo transparente)
     fotoHistoria: "assets/img/jacinto-asamblea.webp", // SU HISTORIA: foto con la comunidad (vacío = usa "foto")
-    banderola: "assets/img/banderola.png", // foto de la banderola de campaña
     lema: "En Challhuahuacho, la lucha de toda una vida al servicio de nuestro pueblo",
     frasesRotativas: [
       "dirigente social",

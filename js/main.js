@@ -29,6 +29,7 @@
 
   /* ---------- Iconos (SVG en línea) ---------- */
   const ICONS = {
+    play: '<circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/>',
     seed: '<path d="M12 22V12"/><path d="M12 12C12 7 8 4 3 4c0 5 4 8 9 8z"/><path d="M12 14c0-4 3-7 8-7 0 4-3 7-8 7z"/>',
     flag: '<path d="M4 22V4"/><path d="M4 4h13l-2 4 2 4H4"/>',
     fist: '<path d="M7 11V6a2 2 0 0 1 4 0v5"/><path d="M11 10V5a2 2 0 0 1 4 0v5"/><path d="M15 10V7a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8H9a4 4 0 0 1-4-4v-3a2 2 0 0 1 2-2h5"/>',
@@ -57,8 +58,6 @@
   document.title = `${fullName} · ${c.grito || "Una vida de lucha social"}`;
   $$("[data-emblem]").forEach((el) => (el.innerHTML = emblem()));
   $$("[data-grito]").forEach((el) => (el.innerHTML = `<span>${esc(c.grito)}</span>`));
-  if (c.banderola) $("#banderolaImg").src = c.banderola;
-  else $("#banderola").remove();
   $$("[data-fullname]").forEach((el) => (el.textContent = fullName));
   $$("[data-fullname-short]").forEach((el) => (el.textContent = c.nombre));
   $$("[data-cargo]").forEach((el) => (el.textContent = c.cargo));
@@ -69,18 +68,22 @@
   $$("[data-vote]").forEach((el) => (el.innerHTML = voteMark()));
 
   // Fotos: retrato en la portada y foto con la comunidad en "Su historia" (sin foto se muestra el símbolo)
-  const photo = (src, alt, cls = "", eager = false) => src
-    ? `<div class="photo ${cls}"><img src="${esc(src)}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>`
+  // Versión liviana para celular: "foto.webp" -> "foto-800.webp" (portada) / "-720" (historia)
+  const srcset = (src, small, w) => src.endsWith(".webp") ? `srcset="${esc(src.replace(/\.webp$/, `-${small}.webp`))} ${small}w, ${esc(src)} ${w}w"` : "";
+  const photo = (src, alt, cls = "", eager = false, set = "") => src
+    ? `<div class="photo ${cls}"><img src="${esc(src)}" ${set} alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>`
     : `<div class="portrait-emblem grow">${emblem()}</div>`;
   const cutout = c.foto && c.fotoSinFondo;
   // Foto recortada: el candidato "sale" sobre el bloque rojo de la portada, sin marco
   $("#heroPortrait").classList.toggle("hero__portrait--cutout", !!cutout);
   $(".hero").classList.toggle("hero--cutout", !!cutout);
-  $("#heroPortrait").innerHTML = photo(c.foto, `${fullName}, candidato a alcalde de ${c.lugar}, con la bandera del Perú`, cutout ? "photo--cutout" : "", true) +
+  $("#heroPortrait").innerHTML = photo(c.foto, `${fullName}, candidato a alcalde de ${c.lugar}, con la bandera del Perú`, cutout ? "photo--cutout" : "", true,
+    `${srcset(c.foto, 800, 1448)} sizes="(max-width: 900px) 92vw, 50vw" width="1448" height="1086"`) +
     `<div class="vote-badge">${voteMark()}<span>Marca así<b>${esc(c.partido)}</b></span></div>`;
   // "Su historia": foto con la comunidad; si no hay, la foto recortada sobre el símbolo del partido
   $("#bioPhoto").innerHTML = c.fotoHistoria
-    ? photo(c.fotoHistoria, `${fullName} dirigiéndose a la asamblea comunal`, "photo--historia")
+    ? photo(c.fotoHistoria, `${fullName} dirigiéndose a la asamblea comunal`, "photo--historia", false,
+      `${srcset(c.fotoHistoria, 720, 960)} sizes="(max-width: 900px) 300px, 480px" width="960" height="1280"`)
     : photo(c.foto, fullName, cutout ? "photo--symbol" : "");
 
   /* ---------- Título hero letra por letra ---------- */
@@ -111,13 +114,22 @@
     "beforeend",
     S.trayectoria
       .map(
-        (t, i) => `<div class="tl-item ${i % 2 ? "reveal-right" : "reveal-left"}">
+        (t, i) => `<div class="tl-item ${i % 2 ? "reveal-right" : "reveal-left"}${i >= 4 ? " tl-item--extra" : ""}">
           <div class="tl-item__dot">${icon(t.icono)}</div>
           <div class="tl-card"><div class="tl-card__year">${esc(t.anio)}</div><h3>${esc(t.titulo)}</h3><p>${esc(t.texto)}</p></div>
         </div>`
       )
       .join("")
   );
+  // En celular se muestran los primeros hitos y un botón para ver el resto
+  if (S.trayectoria.length > 4) {
+    $("#timeline").insertAdjacentHTML("afterend", `<button type="button" class="btn btn--ghost tl-more" id="tlMore" aria-expanded="false">Ver toda la trayectoria (${S.trayectoria.length}) ↓</button>`);
+    $("#tlMore").addEventListener("click", (e) => {
+      $("#timeline").classList.add("open");
+      e.currentTarget.remove();
+      $$(".tl-item--extra").forEach((el) => el.classList.add("in"));
+    });
+  }
 
   /* ---------- Caso Cotabambas ---------- */
   const caso = S.caso;
@@ -238,6 +250,19 @@
     $("#planPanel").innerHTML = `<div class="plan__head"><span class="plan__big">${found}</span><div><h3>Resultados para “${esc(ev.target.value.trim())}”</h3><p>${found ? "propuestas encontradas" : "No encontramos propuestas con esa palabra. Prueba con otra."}</p></div></div>${blocks}`;
   });
   renderEje(0);
+
+  /* ---------- Acceso rápido: "¿Qué quieres saber?" ---------- */
+  const quick = [
+    ["#historia", "seed", "Quién es", "Nacido en Tambulla · docente"],
+    ["#trayectoria", "flag", "Trayectoria", `${S.trayectoria.length} hitos de lucha`],
+    ["#caso", "shield", "Caso Cotabambas", "Absuelto: inocente"],
+    ["#luchas", "star", "Logros", `${S.luchas.length} logros junto al pueblo`],
+    ["#propuestas", "book", "Propuestas", `${total} propuestas en ${plan.length} ejes`],
+    ["#redes", "play", "En redes", "Videos y publicaciones"]
+  ];
+  $("#quick").innerHTML = quick
+    .map(([href, ic, t, sub], i) => `<a class="quick__item reveal" style="--d:${i * 0.06}s" href="${href}"><span class="quick__icon">${icon(ic)}</span><span><b>${t}</b><small>${esc(sub)}</small></span><span class="quick__go" aria-hidden="true">→</span></a>`)
+    .join("");
 
   /* ---------- Redes: las publicaciones y videos se abren en un reproductor dentro de la página ---------- */
   const netName = { tiktok: "TikTok", facebook: "Facebook", video: "Facebook Video" };
@@ -407,6 +432,7 @@
   const nav = $("#nav"), bar = $("#progress"), tl = $("#timeline"), tlFill = $("#timelineFill");
   const sections = $$("main section[id]");
   const navLinks = $$(".nav__links a[href^='#']");
+  const tabs = $$("#tabbar [data-tab]");
   let ticking = false;
   const onScroll = () => {
     const y = window.scrollY, vh = window.innerHeight;
@@ -419,6 +445,8 @@
     let current = "";
     sections.forEach((s) => { if (s.getBoundingClientRect().top < vh * 0.4) current = s.id; });
     navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${current}`));
+    const tab = { inicio: "inicio", cifras: "inicio", historia: "historia", trayectoria: "historia", caso: "historia", luchas: "luchas", propuestas: "propuestas" }[current || "inicio"] || "";
+    tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === tab));
     ticking = false;
   };
   window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
@@ -457,9 +485,17 @@
     });
     const glow = $("#cursorGlow");
     let gx = 0, gy = 0, tx = 0, ty = 0;
-    window.addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; glow.classList.add("on"); }, { passive: true });
-    const follow = () => { gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12; glow.style.transform = `translate(${gx}px, ${gy}px)`; requestAnimationFrame(follow); };
-    follow();
+    let running = false;
+    const follow = () => {
+      gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12;
+      glow.style.transform = `translate(${gx}px, ${gy}px)`;
+      running = Math.abs(tx - gx) + Math.abs(ty - gy) > 0.5;
+      if (running) requestAnimationFrame(follow);
+    };
+    window.addEventListener("pointermove", (e) => {
+      tx = e.clientX; ty = e.clientY; glow.classList.add("on");
+      if (!running) { running = true; requestAnimationFrame(follow); }
+    }, { passive: true });
   }
 
   /* ---------- Partículas del hero ---------- */
@@ -471,7 +507,7 @@
     W = canvas.clientWidth; H = canvas.clientHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.min(Math.floor((W * H) / 14000), 110);
+    const n = Math.min(Math.floor((W * H) / (W < 700 ? 22000 : 14000)), W < 700 ? 40 : 100);
     pts = Array.from({ length: n }, (_, i) => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, r: Math.random() * 2.2 + 1, red: i % 3 === 0 }));
   };
   const css = getComputedStyle(document.documentElement);
@@ -493,13 +529,14 @@
       if (d < 120) { ctx.globalAlpha = (1 - d / 120) * 0.3; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
     }
     ctx.globalAlpha = 1;
-    if (heroVisible && !reduced) requestAnimationFrame(draw);
+    if (heroVisible && !document.hidden && !reduced) requestAnimationFrame(draw);
   };
   resize();
   window.addEventListener("resize", resize);
   canvas.parentElement.addEventListener("pointermove", (e) => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
   canvas.parentElement.addEventListener("pointerleave", () => (mouse.x = mouse.y = -999));
   new IntersectionObserver(([en]) => { const was = heroVisible; heroVisible = en.isIntersecting; if (heroVisible && !was) draw(); }).observe(canvas);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && heroVisible) draw(); });
   draw();
 
   /* ---------- Hojas que caen en la portada ---------- */
@@ -518,7 +555,9 @@
     heroTitle.classList.add("play");
     $$(".hero .reveal").forEach((el, i) => { el.style.setProperty("--d", `${0.4 + i * 0.12}s`); el.classList.add("in"); });
   };
-  const minWait = new Promise((r) => setTimeout(r, reduced ? 0 : 1300));
-  const loaded = new Promise((r) => (document.readyState === "complete" ? r() : window.addEventListener("load", r)));
-  Promise.race([Promise.all([minWait, loaded]), new Promise((r) => setTimeout(r, 3500))]).then(start);
+  // Pantalla de carga breve: sale cuando la foto de portada está lista (máximo 1,5 s)
+  const heroImg = $("#heroPortrait img");
+  const heroReady = heroImg ? heroImg.decode().catch(() => {}) : Promise.resolve();
+  const minWait = new Promise((r) => setTimeout(r, reduced ? 0 : 450));
+  Promise.race([Promise.all([minWait, heroReady]), new Promise((r) => setTimeout(r, 1500))]).then(start);
 })();

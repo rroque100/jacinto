@@ -6,11 +6,22 @@
   <title>Jacinto Lima Lucas · ¡Venceremos!</title>
   <meta name="description" content="Jacinto Lima Lucas, candidato a alcalde distrital de Challhuahuacho: historia de vida y lucha social. ¡Venceremos!">
   <meta name="theme-color" content="#be1623">
+  <!-- Vista previa al compartir en WhatsApp / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jacinto Lima Lucas · Alcalde de Challhuahuacho · ¡Venceremos!">
+  <meta property="og:description" content="Dirigente comunero, docente y defensor ambiental. Conoce su historia, sus logros y sus 75 propuestas para Challhuahuacho.">
+  <meta property="og:image" content="https://jacinto-lima.vercel.app/assets/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_PE">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23be1623'/%3E%3Ccircle cx='32' cy='32' r='24' fill='%23fff'/%3E%3Cpath d='M32 14c9 8 9 22 0 32-9-10-9-24 0-32z' fill='%2300b050' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="preload" as="image" href="assets/img/jacinto.webp" imagesrcset="assets/img/jacinto-800.webp 800w, assets/img/jacinto.webp 1448w" imagesizes="(max-width: 900px) 92vw, 50vw" fetchpriority="high">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Fuentes sin bloquear el dibujo de la página -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/img/jacinto.webp" fetchpriority="high">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&display=swap" media="print" onload="this.media='all'">
 </head>
 <body class="is-loading">
 
@@ -64,18 +75,13 @@
     <!-- Marquesina -->
     <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marquee"></div></div>
 
-    <!-- CIFRAS -->
+    <!-- CIFRAS + ACCESO RÁPIDO -->
     <section class="stats" id="cifras">
       <div class="container stats__grid" id="stats"></div>
-    </section>
-
-    <!-- BANDEROLA -->
-    <section class="banderola" id="banderola">
-      <div class="container">
-        <figure class="banderola__frame reveal" id="banderolaFrame">
-          <img id="banderolaImg" alt="Banderola de campaña: En Challhuahuacho, Jacinto Lima Lucas, ¡Venceremos!" loading="lazy">
-        </figure>
-      </div>
+      <nav class="container quick" aria-label="Acceso rápido">
+        <h2 class="quick__title reveal">¿Qué quieres saber?</h2>
+        <div class="quick__grid" id="quick"></div>
+      </nav>
     </section>
 
     <!-- HISTORIA -->
@@ -194,7 +200,16 @@
     </div>
   </div>
 
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+  <!-- Barra de navegación inferior (celular) -->
+  <nav class="tabbar" id="tabbar" aria-label="Navegación rápida">
+    <a href="#inicio" data-tab="inicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Inicio</a>
+    <a href="#historia" data-tab="historia"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Quién es</a>
+    <a href="#luchas" data-tab="luchas"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg>Logros</a>
+    <a href="#propuestas" data-tab="propuestas"><svg viewBox="0 0 24 24"><path d="M9 4h10v16H5V8z"/><path d="M9 4v4H5"/><path d="M9 13l2 2 4-4"/></svg>Propuestas</a>
+    <a href="#" data-wa target="_blank" rel="noopener" class="tabbar__wa"><svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.4.7 4.7 1.9 6.7L3 29l6.9-2.2c1.9 1 4 1.6 6.1 1.6 7 0 12.7-5.7 12.7-12.7S23 3 16 3z"/></svg>WhatsApp</a>
+  </nav>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

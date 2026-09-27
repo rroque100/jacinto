@@ -39,4 +39,11 @@ Es un sitio estático: funciona en GitHub Pages, Netlify, Vercel o cualquier hos
 Preloader, título animado letra por letra, red de partículas interactiva, texto tipo máquina de escribir,
 cuenta regresiva, marquesina, contadores animados, revelado al hacer scroll, línea de tiempo que se dibuja,
 tarjetas con inclinación 3D y brillo, botones magnéticos, plan de gobierno por ejes con buscador,
-reproductor de redes integrado, modal y barra de progreso. Respeta `prefers-reduced-motion`.
+reproductor de redes integrado, modal y barra de progreso.
+
+## Navegación y rendimiento
+- Acceso rápido "¿Qué quieres saber?" debajo de las cifras y barra inferior fija en celular
+  (Inicio, Quién es, Logros, Propuestas, WhatsApp) que marca la sección activa.
+- Fotos en WebP con versión liviana para celular (`-800` / `-720`) mediante `srcset`.
+- Scripts diferidos, fuentes sin bloqueo (Inter variable) y animaciones que se pausan fuera de pantalla.
+- Vista previa al compartir (Open Graph): `assets/img/og.jpg` (1200 × 630). Respeta `prefers-reduced-motion`.
