@@ -197,23 +197,30 @@
     .join("");
 
   // Arma la dirección del reproductor oficial (embed) de cada red.
-  const tiktokId = async (r) => {
-    if (r.id) return r.id;
-    const m = r.url.match(/\/video\/(\d+)/);
-    if (m) return m[1];
-    try { // los enlaces cortos (vt.tiktok.com) se resuelven con el oEmbed público de TikTok
+  // Los enlaces cortos de "compartir" se convierten primero en su dirección completa
+  // con la función /api/resolve (Vercel), porque los reproductores oficiales no los aceptan.
+  const resolved = {};
+  const resolveUrl = async (url) => {
+    if (resolved[url]) return resolved[url];
+    try {
       const ctrl = new AbortController();
-      setTimeout(() => ctrl.abort(), 6000);
-      const res = await fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(r.url)}`, { signal: ctrl.signal });
-      const html = (await res.json()).html || "";
-      return (html.match(/data-video-id="(\d+)"/) || [])[1] || null;
-    } catch { return null; }
+      setTimeout(() => ctrl.abort(), 8000);
+      const res = await fetch(`/api/resolve?url=${encodeURIComponent(url)}`, { signal: ctrl.signal });
+      const data = await res.json();
+      if (data.url) return (resolved[url] = data.url);
+    } catch {}
+    return url;
   };
   const embedSrc = async (r) => {
     if (r.embed) return r.embed;
-    if (r.tipo === "tiktok") { const id = await tiktokId(r); return id ? `https://www.tiktok.com/embed/v2/${id}?lang=es` : null; }
-    const plugin = r.tipo === "video" ? "video" : "post";
-    return `https://www.facebook.com/plugins/${plugin}.php?href=${encodeURIComponent(r.url)}&show_text=true&width=500&locale=es_LA`;
+    const isShort = /\/share\/|fb\.watch|vt\.tiktok|vm\.tiktok/.test(r.url);
+    const url = isShort ? await resolveUrl(r.url) : r.url;
+    if (r.tipo === "tiktok") {
+      const id = r.id || (url.match(/\/(?:video|photo)\/(\d+)/) || [])[1];
+      return id ? `https://www.tiktok.com/embed/v2/${id}?lang=es` : null;
+    }
+    const video = r.tipo === "video" || /\/(videos|reel|watch)\b|fb\.watch/.test(url);
+    return `https://www.facebook.com/plugins/${video ? "video" : "post"}.php?href=${encodeURIComponent(url)}&show_text=true&width=500&locale=es_LA`;
   };
 
   const media = $("#media"), mFrame = $("#mediaFrame");
