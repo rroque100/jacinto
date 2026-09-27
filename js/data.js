@@ -27,10 +27,10 @@ window.SITE = {
     ]
   },
 
-  // Colores de campaña tomados de la banderola (rojo, verde hoja, negro)
+  // Colores del símbolo oficial del partido (rojo, verde hoja, negro)
   colores: {
-    primario: "#e3241b",
-    secundario: "#2f9e36",
+    primario: "#be1623",
+    secundario: "#00b050",
     oscuro: "#111111"
   },
 
@@ -99,7 +99,8 @@ window.SITE = {
   ],
 
   contacto: {
-    whatsapp: "",          // solo dígitos con código de país, ej: "51999999999" (vacío = oculto)
+    whatsapp: "51997197498",   // solo dígitos con código de país (vacío = oculto)
+    mensajeWhatsapp: "Hola Jacinto, quiero sumarme a la campaña en Challhuahuacho. ¡Venceremos!",
     correo: "",            // ej: "campana@ejemplo.pe"
     facebook: "",          // URL de la página oficial
     tiktok: ""             // URL del perfil
