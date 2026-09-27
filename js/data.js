@@ -21,6 +21,7 @@ window.SITE = {
     lema: "En Challhuahuacho, la lucha de toda una vida al servicio de nuestro pueblo",
     frasesRotativas: [
       "dirigente social",
+      "defensor ambiental",
       "defensor del pueblo",
       "hombre de trabajo",
       "voz de los que no tienen voz"
@@ -58,18 +59,44 @@ window.SITE = {
   trayectoria: [
     { anio: "2015 – 2016", titulo: "Presidente de la Comunidad de Tambulla", texto: "Dirigente comunero elegido presidente de la comunidad campesina de Tambulla.", icono: "flag" },
     { anio: "2015 – 2016", titulo: "Comité de Lucha Interprovincial", texto: "Integrante del Comité de Lucha Interprovincial de Cotabambas, Grau y Chumbivilcas.", icono: "fist" },
+    { anio: "Set. 2015", titulo: "Protestas contra los cambios al EIA de Las Bambas", texto: "Moviliza a las comunidades frente a las modificaciones inconsultas del Estudio de Impacto Ambiental, que eliminaron el mineroducto y llevaron cientos de camiones pesados por las comunidades.", icono: "fist" },
     { anio: "2020 – 2021", titulo: "Presidente de la Federación Campesina", texto: "Presidente de la Federación Campesina del distrito de Challhuahuacho.", icono: "leaf" },
     { anio: "2024", titulo: "Agente de la Comunidad de Tambulla", texto: "Agente de la comunidad campesina de Tambulla.", icono: "build" },
+    { anio: "Abr. 2025", titulo: "Absuelto: se reconoce su inocencia", texto: "La Sala Penal de Apelaciones de Apurímac lo absuelve por unanimidad junto a otros 10 dirigentes de Cotabambas y Grau, tras casi 10 años de proceso.", icono: "shield" },
     { anio: "2025", titulo: "Secretario General del SUTEP", texto: "Secretario General del S.U.T.E.P. Challhuahuacho.", icono: "book" },
     { anio: "2026", titulo: "Candidato a Alcalde Distrital", texto: "Asume el reto de llevar la voz del pueblo a la Municipalidad Distrital de Challhuahuacho.", icono: "vote" }
   ],
 
+  // Caso judicial: criminalización por las protestas de 2015 y absolución en 2025
+  caso: {
+    titulo: "Criminalizado por defender su tierra. Hoy, inocente.",
+    intro: "Por encabezar junto a sus comunidades las protestas de 2015 contra los cambios inconsultos al proyecto minero Las Bambas, Jacinto Lima Lucas fue uno de los 11 dirigentes comunales y defensores ambientales de Cotabambas y Grau llevados a juicio. Tras casi 10 años de proceso, la justicia reconoció su inocencia.",
+    etapas: [
+      { fecha: "Set. 2015", titulo: "La protesta", texto: "Las comunidades se movilizan contra las modificaciones del EIA hechas sin consulta previa." },
+      { fecha: "2016", titulo: "El proceso", texto: "Se abre el Expediente N.° 41-2016 contra 11 dirigentes de Cotabambas y Grau." },
+      { fecha: "Jul. 2024", titulo: "La condena", texto: "En primera instancia se les imponen de 8 a 9 años de prisión efectiva y el pago de reparaciones al Estado y a la minera." },
+      { fecha: "Abr. 2025", titulo: "La absolución", texto: "La Sala Penal de Apelaciones de Apurímac revoca por unanimidad la condena y los absuelve." }
+    ],
+    claves: [
+      { titulo: "No había pruebas", texto: "El tribunal determinó que no existían pruebas directas que los vincularan con los delitos imputados, y rechazó culpar a los dirigentes por \"autoría mediata\"." },
+      { titulo: "La protesta era legítima", texto: "Los magistrados reconocieron que las movilizaciones nacieron de un reclamo legítimo frente a cambios al EIA hechos sin consulta a las comunidades." },
+      { titulo: "Decisión unánime", texto: "La Sala revocó por unanimidad la sentencia de primera instancia. Lucharon por su territorio y hoy su inocencia está reconocida." }
+    ],
+    fuentes: [
+      { nombre: "Inforegión", url: "https://inforegion.pe/tras-10-anos-de-juicio-se-comprueba-la-inocencia-de-los-11-defensores-ambientales-de-cotabambas/" },
+      { nombre: "Wayka", url: "https://wayka.pe/caso-cotabambas-justicia-absuelve-a-los-11-comuneros-criminalizados-por-protestar-contra-empresa-minera/" },
+      { nombre: "Grufides", url: "https://grufides.org/sin-categoria/pj-reconoce-inocencia-de-once-defensores-ambientales-de-cotabambas-denunciados-por-el-estado-y-una-minera/" },
+      { nombre: "CooperAcción", url: "https://cooperaccion.org.pe/apurimac-condenan-a-dirigentes-criminalizados-por-defender-sus-territorios-en-cotabambas-y-grau/" },
+      { nombre: "CNDDHH", url: "https://www.facebook.com/cnddhh/posts/justiciaparadefensoresen-cotabambas-apur%C3%ADmac-11-defensores-ambientales-lucharon-/1071171465037929/" }
+    ]
+  },
+
   luchas: [
+    { titulo: "Territorio y medio ambiente", icono: "leaf", resumen: "Defensor ambiental de Cotabambas y Grau frente a los cambios inconsultos al proyecto Las Bambas.", detalle: "En 2015 las comunidades se movilizaron contra las modificaciones del Estudio de Impacto Ambiental de Las Bambas, hechas sin consulta previa. Por defender su territorio fue procesado y condenado en primera instancia, pero en abril de 2025 la Sala Penal de Apelaciones de Apurímac lo absolvió por unanimidad y reconoció la legitimidad de la protesta." },
     { titulo: "Agua y saneamiento", icono: "drop", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle: qué se hizo, con quiénes, qué se logró.]" },
     { titulo: "Educación", icono: "book", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" },
     { titulo: "Salud", icono: "heart", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" },
     { titulo: "Trabajo digno", icono: "tool", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" },
-    { titulo: "Agro y territorio", icono: "leaf", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" },
     { titulo: "Seguridad ciudadana", icono: "shield", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" }
   ],
 

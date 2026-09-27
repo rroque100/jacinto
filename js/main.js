@@ -110,6 +110,29 @@
       .join("")
   );
 
+  /* ---------- Caso Cotabambas ---------- */
+  const caso = S.caso;
+  if (caso) {
+    $("#casoTitle").textContent = caso.titulo;
+    $("#casoIntro").textContent = caso.intro;
+    $("#casoSteps").insertAdjacentHTML("beforeend", caso.etapas
+      .map((e, i) => `<li class="caso__step reveal" style="--d:${i * 0.25}s"><span class="caso__dot"></span><b>${esc(e.fecha)}</b><h3>${esc(e.titulo)}</h3><p>${esc(e.texto)}</p></li>`)
+      .join(""));
+    $("#casoClaves").innerHTML = caso.claves
+      .map((k, i) => `<article class="clave reveal" style="--d:${i * 0.12}s"><span class="clave__n">0${i + 1}</span><h3>${esc(k.titulo)}</h3><p>${esc(k.texto)}</p></article>`)
+      .join("");
+    $("#casoFuentes").innerHTML = "Fuentes: " + caso.fuentes
+      .map((f) => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.nombre)}</a>`)
+      .join(" · ");
+    // El sello "INOCENTE" cae cuando la línea del caso llega al final
+    new IntersectionObserver(([en], obs) => {
+      if (!en.isIntersecting) return;
+      $("#casoRail").classList.add("run");
+      setTimeout(() => $("#stamp").classList.add("slam"), reduced ? 0 : 1300);
+      obs.disconnect();
+    }, { threshold: 0.4 }).observe($("#casoSteps"));
+  } else $("#caso").remove();
+
   /* ---------- Luchas ---------- */
   $("#luchasGrid").innerHTML = S.luchas
     .map(
