@@ -40,6 +40,7 @@
     heart: '<path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/>',
     tool: '<path d="M14.7 6.3a4 4 0 0 0 5 5L22 14l-8 8-2.7-2.3a4 4 0 0 0-5-5L2 10l8-8z"/>',
     leaf: '<path d="M11 20A7 7 0 0 1 4 13C4 6 11 3 20 3c0 9-3 17-9 17z"/><path d="M4 21c4-6 8-9 12-11"/>',
+    coin: '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
     shield: '<path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>'
   };
   const icon = (k) => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICONS.star}</svg>`;
@@ -138,6 +139,7 @@
     .map(
       (l, i) => `<button type="button" class="card tilt reveal" style="--d:${(i % 3) * 0.1}s" data-lucha="${i}">
         <div class="card__icon">${icon(l.icono)}</div>
+        ${l.etiqueta ? `<span class="card__tag">${esc(l.etiqueta)}</span>` : ""}
         <h3>${esc(l.titulo)}</h3><p>${esc(l.resumen)}</p><span class="card__more">Ver historia →</span>
       </button>`
     )

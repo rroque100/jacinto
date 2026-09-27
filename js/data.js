@@ -91,13 +91,13 @@ window.SITE = {
     ]
   },
 
+  // Logros junto al pueblo como dirigente social (sección "Logros")
   luchas: [
-    { titulo: "Territorio y medio ambiente", icono: "leaf", resumen: "Defensor ambiental de Cotabambas y Grau frente a los cambios inconsultos al proyecto Las Bambas.", detalle: "En 2015 las comunidades se movilizaron contra las modificaciones del Estudio de Impacto Ambiental de Las Bambas, hechas sin consulta previa. Por defender su territorio fue procesado y condenado en primera instancia, pero en abril de 2025 la Sala Penal de Apelaciones de Apurímac lo absolvió por unanimidad y reconoció la legitimidad de la protesta." },
-    { titulo: "Agua y saneamiento", icono: "drop", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle: qué se hizo, con quiénes, qué se logró.]" },
-    { titulo: "Educación", icono: "book", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" },
-    { titulo: "Salud", icono: "heart", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" },
-    { titulo: "Trabajo digno", icono: "tool", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" },
-    { titulo: "Seguridad ciudadana", icono: "shield", resumen: "[Resumen corto de la lucha.]", detalle: "[Detalle de la lucha.]" }
+    { titulo: "Hospital de Challhuahuacho", icono: "heart", etiqueta: "Logro", resumen: "Luchó junto al pueblo por el hospital de Challhuahuacho.", detalle: "Como dirigente social, acompañó a la población en la lucha por el hospital de Challhuahuacho: salud digna y cercana para las familias del distrito." },
+    { titulo: "Represamiento de agua en la parte alta", icono: "drop", etiqueta: "Logro", resumen: "Represamiento de agua en la parte alta para las comunidades.", detalle: "Junto a las comunidades, impulsó el represamiento de agua en la parte alta: agua asegurada para el consumo, el riego y la vida en el campo." },
+    { titulo: "Vivero forestal hasta el cierre de mina", icono: "seed", etiqueta: "Logro", resumen: "Un vivero forestal que funcionará hasta el cierre de la mina.", detalle: "Junto al pueblo logró un vivero forestal que debe funcionar hasta el cierre de la mina, para cuidar y recuperar el territorio." },
+    { titulo: "Canon minero para toda la región", icono: "coin", etiqueta: "Logro", resumen: "Exigió junto con el pueblo el canon minero para toda la región.", detalle: "Exigió junto con el pueblo que el canon minero llegue a toda la región, para que la riqueza de nuestra tierra se quede en nuestras comunidades." },
+    { titulo: "Territorio y medio ambiente", icono: "leaf", etiqueta: "Lucha", resumen: "Defensor ambiental de Cotabambas y Grau frente a los cambios inconsultos al proyecto Las Bambas.", detalle: "En 2015 las comunidades se movilizaron contra las modificaciones del Estudio de Impacto Ambiental de Las Bambas, hechas sin consulta previa. Por defender su territorio fue procesado y condenado en primera instancia, pero en abril de 2025 la Sala Penal de Apelaciones de Apurímac lo absolvió por unanimidad y reconoció la legitimidad de la protesta." }
   ],
 
   propuestas: [
