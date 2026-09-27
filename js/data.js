@@ -47,9 +47,9 @@ window.SITE = {
   historia: {
     titulo: "Nacido del pueblo, formado en la lucha",
     parrafos: [
-      "[Lugar y año de nacimiento. Origen familiar, infancia y los valores que recibió de sus padres.]",
-      "[Estudios y primeros trabajos. Qué experiencias lo acercaron a los problemas de su comunidad.]",
-      "[Cómo empezó su participación como dirigente y qué causas ha defendido desde entonces.]"
+      "Nacido en la comunidad de Tambulla.",
+      "Docente de educación regular.",
+      "2015-2016: dirigente comunero, presidente de la comunidad de Tambulla."
     ],
     cita: "[Frase representativa del candidato, tomada de uno de sus videos o publicaciones.]"
   },
