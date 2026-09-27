@@ -100,13 +100,123 @@ window.SITE = {
     { titulo: "Territorio y medio ambiente", icono: "leaf", etiqueta: "Lucha", resumen: "Defensor ambiental de Cotabambas y Grau frente a los cambios inconsultos al proyecto Las Bambas.", detalle: "En 2015 las comunidades se movilizaron contra las modificaciones del Estudio de Impacto Ambiental de Las Bambas, hechas sin consulta previa. Por defender su territorio fue procesado y condenado en primera instancia, pero en abril de 2025 la Sala Penal de Apelaciones de Apurímac lo absolvió por unanimidad y reconoció la legitimidad de la protesta." }
   ],
 
-  propuestas: [
-    { eje: "Social", titulo: "[Propuesta 1]", texto: "[Explicación breve.]" },
-    { eje: "Social", titulo: "[Propuesta 2]", texto: "[Explicación breve.]" },
-    { eje: "Economía", titulo: "[Propuesta 3]", texto: "[Explicación breve.]" },
-    { eje: "Economía", titulo: "[Propuesta 4]", texto: "[Explicación breve.]" },
-    { eje: "Infraestructura", titulo: "[Propuesta 5]", texto: "[Explicación breve.]" },
-    { eje: "Transparencia", titulo: "[Propuesta 6]", texto: "[Explicación breve.]" }
+  // Plan de gobierno: 8 ejes temáticos. Cada eje puede tener subgrupos con sus propuestas.
+  planGobierno: [
+    { eje: "Desarrollo económico y productivo", icono: "leaf", grupos: [
+      { nombre: "Agricultura y ganadería", items: [
+        "Garantizar el agua.",
+        "Apoyo a productores: asignación presupuestal a PROCOMPITE con zonificación económica (financiamiento directo a todos los planes de negocio aprobados, entre el 5 % y el 15 % del presupuesto local), Ley N.º 29337."
+      ]},
+      { nombre: "Mercado y comercialización", items: [
+        "Acogiéndonos al convenio (Anexo “K” N.º 08): impulsar Expo Arte de carácter nacional, comunal y sectorial.",
+        "Adquisición de camiones para el transporte de ganado y productos."
+      ]},
+      { nombre: "Turismo", items: [
+        "Promover un circuito turístico vivencial aprovechando el calendario festivo cultural, ritual, agrícola y ganadero, y los atractivos turísticos.",
+        "Consolidar las manifestaciones culturales como patrimonio cultural ante el Ministerio de Cultura.",
+        "Revaloración de tradiciones y costumbres mediante proyectos."
+      ]},
+      { nombre: "Oportunidad laboral y empleo para la población vulnerable y la juventud", items: [
+        "Dar oportunidades a las pequeñas y medianas empresas ejecutando obras por administración directa.",
+        "No al acaparamiento ni al direccionamiento de los puestos laborales.",
+        "Generar oportunidad laboral para adultos mayores, mujeres y madres solteras (invernadero municipal).",
+        "Implementar un proyecto de feria dominical.",
+        "Incremento salarial por el exceso del costo de vida.",
+        "Prácticas preprofesionales con remuneración.",
+        "Generar fuentes de empleo eventuales.",
+        "Exclusividad de los puestos laborales para los lugareños, con meritocracia."
+      ]}
+    ]},
+    { eje: "Salud y educación", icono: "book", grupos: [
+      { nombre: "Educación", items: [
+        "Creación de una beca integral desde la Municipalidad para los mejores talentos, con acceso meritocrático.",
+        "Cerrar brechas de infraestructura educativa.",
+        "Proyectos de innovación tecnológica (TIC).",
+        "Creación del CRECH (Centro de Recursos Educativos Challhuahuacho).",
+        "Creación de colegios politécnicos.",
+        "Impulsar la Educación Básica Alternativa (EBA) y la Educación Básica Especial (EBE).",
+        "Creación de una academia preuniversitaria municipal por cuencas.",
+        "Creación de la universidad, acogiéndonos al decreto supremo.",
+        "Internet de banda ancha.",
+        "Cerrar brechas con aulas interactivas.",
+        "Atención a estudiantes de zonas rurales con movilidades.",
+        "Suscribir un convenio interinstitucional para mejorar los programas de alimentación con insumos, incluida la cocinera escolar.",
+        "Programas de posgrado para todos los docentes.",
+        "Bono docente.",
+        "Exigir al GORE el cumplimiento de una unidad ejecutora."
+      ]},
+      { nombre: "Salud", items: [
+        "Construcción de puestos de salud y recategorización.",
+        "Campañas de salud integral por comunidad.",
+        "Gestionar EsSalud desde el primer periodo de gobierno."
+      ]}
+    ]},
+    { eje: "Agua, saneamiento y servicios básicos", icono: "drop", grupos: [
+      { items: [
+        "Cerrar brechas de saneamiento básico comunal, sectorial y del casco urbano.",
+        "Exigir el cumplimiento de la PTAR (planta de tratamiento de aguas residuales).",
+        "Ampliación de la electrificación rural y pararrayos.",
+        "Gestionar RENIEC desde el primer periodo de gobierno.",
+        "Gestionar una agencia del Banco de la Nación desde el primer periodo de gobierno."
+      ]}
+    ]},
+    { eje: "Infraestructura y conectividad", icono: "build", grupos: [
+      { items: [
+        "Apertura de los caminos vecinales que aún faltan.",
+        "Asfaltado bicapa de todas las arterias principales del distrito de Challhuahuacho, de extremo a extremo.",
+        "Puentes en el casco urbano, las comunidades y los sectores.",
+        "Mercado moderno.",
+        "Estadio monumental.",
+        "Ordenamiento vial del transporte público.",
+        "Parques recreativos y zonas de sano esparcimiento.",
+        "Defensa ribereña en el casco urbano: ¡recuperemos el río de Challhuahuacho!",
+        "Adquirir terreno para una playa de estacionamiento."
+      ]}
+    ]},
+    { eje: "Minería, ambiente y desarrollo sostenible", icono: "seed", grupos: [
+      { items: [
+        "Aliado estratégico (Minera Las Bambas) para el bien común.",
+        "Protección de las cabeceras de cuenca, puquios y manantes, y reforestación con plantas nativas.",
+        "Cosecha de agua, siembra de agua, qochas y represamientos.",
+        "Segregación de residuos orgánicos e inorgánicos: Challhuahuacho Ch’uya (relleno sanitario).",
+        "OEFA y SENACE: exigir el cumplimiento de sus funciones a cabalidad.",
+        "Inyectar presupuesto a la CAM (Comisión de Monitoreo Ambiental).",
+        "Proyectos productivos para los diferentes sectores de la economía local: hospedajes, lavanderías, textilería, comercio, transporte, arte, restaurantes, piscicultura, ganadería, agricultura, etc.",
+        "Diálogo sincero y transparente, con resultados: como alcalde no desconoceremos a los dirigentes sociales, las organizaciones vivas ni los regidores.",
+        "Impulsar a la brevedad la vía de evitamiento (barrio Carmen Alto).",
+        "Gestionar la instalación de la oficina de la Subgerencia Regional del MTC."
+      ]}
+    ]},
+    { eje: "Comunidades campesinas y desarrollo rural", icono: "flag", grupos: [
+      { items: [
+        "Fortalecimiento de las organizaciones comunales y sociales.",
+        "Organización para el buen vivir: “Allin Kausay”.",
+        "Solucionar nuestras colindancias limítrofes: Forprac (saneamiento físico legal).",
+        "Implementar proyectos de desarrollo comunal y sectorial.",
+        "Participación de las comunidades en la gestión de proyectos y la distribución presupuestal.",
+        "Distribución institucional: pioneros en gestión y fiscalización."
+      ]}
+    ]},
+    { eje: "Juventud, mujeres y población vulnerable", icono: "heart", grupos: [
+      { items: [
+        "Dar prioridad laboral a los jóvenes.",
+        "Empleo y emprendimiento.",
+        "Participación de las mujeres: fortalecer y empoderar en diferentes aspectos.",
+        "Campaña de sensibilización en salud mental “Allin Kausay”.",
+        "Oportunidad laboral y construcción de la casa del adulto mayor y para grupos vulnerables."
+      ]}
+    ]},
+    { eje: "Transparencia, gestión municipal y lucha contra la corrupción", nota: "Amparado en la Ley N.º 27806", icono: "shield", grupos: [
+      { items: [
+        "Implementar una oficina de integridad enlazada con la Contraloría General de la República.",
+        "Implementar la Plataforma Digital Interactiva Challhuahuacho.",
+        "Audiencias públicas semestrales.",
+        "Plan de desarrollo concertado.",
+        "Denunciar cualquier acto de corrupción: cero tolerancia.",
+        "Monitoreo constante de la inseguridad ciudadana.",
+        "Zonificar los locales nocturnos."
+      ]}
+    ]}
   ],
 
   // Publicaciones y videos del candidato. Se ven DENTRO de la página con el reproductor oficial

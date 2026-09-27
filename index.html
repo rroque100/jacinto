@@ -135,8 +135,15 @@
       <div class="container">
         <span class="eyebrow reveal">Plan de gobierno</span>
         <h2 class="section__title reveal">Propuestas</h2>
-        <div class="tabs reveal" id="tabs" role="tablist"></div>
-        <div class="proposals" id="proposals"></div>
+        <p class="section__lead reveal" id="planLead"></p>
+        <label class="plan__search reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <input type="search" id="planSearch" placeholder="Busca una propuesta: agua, becas, empleo, asfaltado…" autocomplete="off">
+        </label>
+        <div class="plan reveal">
+          <div class="plan__ejes" id="planEjes" role="tablist" aria-label="Ejes temáticos"></div>
+          <div class="plan__panel" id="planPanel" role="tabpanel" aria-live="polite"></div>
+        </div>
       </div>
     </section>
 

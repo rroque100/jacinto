@@ -164,22 +164,72 @@
   modal.addEventListener("click", (e) => { if (e.target.closest("[data-close]")) closeModal(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
 
-  /* ---------- Propuestas con pestañas ---------- */
-  const ejes = ["Todas", ...new Set(S.propuestas.map((p) => p.eje))];
-  const renderProposals = (eje) => {
-    $("#proposals").innerHTML = S.propuestas
-      .filter((p) => eje === "Todas" || p.eje === eje)
-      .map((p, i) => `<article class="proposal" style="animation-delay:${i * 0.07}s"><span class="proposal__tag">${esc(p.eje)}</span><h3>${esc(p.titulo)}</h3><p>${esc(p.texto)}</p></article>`)
-      .join("");
+  /* ---------- Plan de gobierno: ejes temáticos + buscador ---------- */
+  const plan = S.planGobierno;
+  const countItems = (e) => e.grupos.reduce((n, g) => n + g.items.length, 0);
+  const total = plan.reduce((n, e) => n + countItems(e), 0);
+  const num = (i) => String(i + 1).padStart(2, "0");
+  $("#planLead").textContent = `${plan.length} ejes temáticos y ${total} propuestas para Challhuahuacho. Elige un eje o busca un tema.`;
+  $("#planEjes").innerHTML = plan
+    .map((e, i) => `<button class="eje" role="tab" aria-selected="${i === 0}" data-eje="${i}">
+        <span class="eje__n">${num(i)}</span><span class="eje__icon">${icon(e.icono)}</span>
+        <span class="eje__name">${esc(e.eje)}</span><span class="eje__count">${countItems(e)}</span>
+      </button>`)
+    .join("");
+  const itemHtml = (t, i, hl) => `<li class="plan__item" style="animation-delay:${Math.min(i, 14) * 0.04}s"><span class="plan__check"></span><span>${hl ? hl(t) : esc(t)}</span></li>`;
+  let planIndex = 0;
+  const renderEje = (i) => {
+    planIndex = i;
+    const e = plan[i];
+    let k = 0;
+    $("#planPanel").innerHTML = `
+      <div class="plan__head"><span class="plan__big">${num(i)}</span><div>
+        <h3>${esc(e.eje)}</h3><p>${countItems(e)} propuestas${e.nota ? ` · ${esc(e.nota)}` : ""}</p></div></div>
+      ${e.grupos.map((g) => `${g.nombre ? `<h4 class="plan__group">${esc(g.nombre)}</h4>` : ""}<ul class="plan__list">${g.items.map((t) => itemHtml(t, k++)).join("")}</ul>`).join("")}
+      <button class="btn btn--small plan__next" data-next>${i < plan.length - 1 ? `Siguiente eje: ${esc(plan[i + 1].eje)} →` : "Volver al primer eje ↺"}</button>`;
+    $$(".eje").forEach((b, j) => b.setAttribute("aria-selected", j === i));
   };
-  $("#tabs").innerHTML = ejes.map((e, i) => `<button class="tab" role="tab" aria-selected="${i === 0}" data-eje="${esc(e)}">${esc(e)}</button>`).join("");
-  $("#tabs").addEventListener("click", (e) => {
-    const tab = e.target.closest(".tab");
-    if (!tab) return;
-    $$(".tab").forEach((t) => t.setAttribute("aria-selected", t === tab));
-    renderProposals(tab.dataset.eje);
+  $("#planEjes").addEventListener("click", (e) => {
+    const b = e.target.closest(".eje");
+    if (!b) return;
+    $("#planSearch").value = "";
+    renderEje(+b.dataset.eje);
+    if (window.innerWidth < 900) $("#planPanel").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   });
-  renderProposals("Todas");
+  $("#planPanel").addEventListener("click", (e) => {
+    if (!e.target.closest("[data-next]")) return;
+    renderEje((planIndex + 1) % plan.length);
+    $("#planPanel").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+  });
+  // Buscador: ignora tildes y mayúsculas
+  const norm = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  $("#planSearch").addEventListener("input", (ev) => {
+    const q = norm(ev.target.value.trim());
+    if (q.length < 2) { renderEje(planIndex); return; }
+    const hl = (t) => {
+      // normaliza letra por letra para que el resaltado coincida aunque haya tildes
+      const chars = [...t], map = [];
+      let n = "";
+      chars.forEach((ch, idx) => { for (const c of norm(ch)) { n += c; map.push(idx); } });
+      let out = "", last = 0, at = n.indexOf(q);
+      while (at >= 0) {
+        const from = map[at], to = map[at + q.length - 1] + 1;
+        out += esc(chars.slice(last, from).join("")) + `<mark>${esc(chars.slice(from, to).join(""))}</mark>`;
+        last = to;
+        at = n.indexOf(q, at + q.length);
+      }
+      return out + esc(chars.slice(last).join(""));
+    };
+    let found = 0, k = 0;
+    const blocks = plan.map((e, i) => {
+      const hits = e.grupos.flatMap((g) => g.items).filter((t) => norm(t).includes(q));
+      found += hits.length;
+      return hits.length ? `<h4 class="plan__group"><span class="plan__tagn">${num(i)}</span>${esc(e.eje)}</h4><ul class="plan__list">${hits.map((t) => itemHtml(t, k++, hl)).join("")}</ul>` : "";
+    }).join("");
+    $$(".eje").forEach((b) => b.setAttribute("aria-selected", "false"));
+    $("#planPanel").innerHTML = `<div class="plan__head"><span class="plan__big">${found}</span><div><h3>Resultados para “${esc(ev.target.value.trim())}”</h3><p>${found ? "propuestas encontradas" : "No encontramos propuestas con esa palabra. Prueba con otra."}</p></div></div>${blocks}`;
+  });
+  renderEje(0);
 
   /* ---------- Redes: las publicaciones y videos se abren en un reproductor dentro de la página ---------- */
   const netName = { tiktok: "TikTok", facebook: "Facebook", video: "Facebook Video" };
