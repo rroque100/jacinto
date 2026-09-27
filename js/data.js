@@ -57,8 +57,8 @@ window.SITE = {
   // Línea de tiempo: agrega, quita o reordena hitos libremente
   trayectoria: [
     { anio: "2015 – 2016", titulo: "Presidente de la Comunidad de Tambulla", texto: "Dirigente comunero elegido presidente de la comunidad campesina de Tambulla.", icono: "flag" },
-    { anio: "2015 – 2016", titulo: "Comité de Lucha Interprovincial", texto: "Integrante del Comité de Lucha Interprovincial de Cotabambas, Grau y Chumbivilcas.", icono: "fist" },   // CONFIRMAR años (llegó escrito "2025-2016")
-    { anio: "2020 – 2021", titulo: "Presidente de la Federación Campesina", texto: "Presidente de la Federación Campesina del distrito de Challhuahuacho.", icono: "leaf" },   // CONFIRMAR nombre (llegó escrito "referencia campesinas")
+    { anio: "2015 – 2016", titulo: "Comité de Lucha Interprovincial", texto: "Integrante del Comité de Lucha Interprovincial de Cotabambas, Grau y Chumbivilcas.", icono: "fist" },
+    { anio: "2020 – 2021", titulo: "Presidente de la Federación Campesina", texto: "Presidente de la Federación Campesina del distrito de Challhuahuacho.", icono: "leaf" },
     { anio: "2024", titulo: "Agente de la Comunidad de Tambulla", texto: "Agente de la comunidad campesina de Tambulla.", icono: "build" },
     { anio: "2025", titulo: "Secretario General del SUTEP", texto: "Secretario General del S.U.T.E.P. Challhuahuacho.", icono: "book" },
     { anio: "2026", titulo: "Candidato a Alcalde Distrital", texto: "Asume el reto de llevar la voz del pueblo a la Municipalidad Distrital de Challhuahuacho.", icono: "vote" }
