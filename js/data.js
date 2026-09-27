@@ -51,7 +51,7 @@ window.SITE = {
       "Docente de educación regular.",
       "2015-2016: dirigente comunero, presidente de la comunidad de Tambulla."
     ],
-    cita: "[Frase representativa del candidato, tomada de uno de sus videos o publicaciones.]"
+    cita: "En Challhuahuacho, ¡venceremos!"
   },
 
   // Línea de tiempo: agrega, quita o reordena hitos libremente
