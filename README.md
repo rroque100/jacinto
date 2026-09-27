@@ -22,7 +22,9 @@ El número y el mensaje se cambian en `js/data.js` (`contacto.whatsapp` y `conta
 Todo el texto, cifras, hitos, logros, caso, propuestas, redes y colores están en **`js/data.js`**.
 Reemplaza cada texto entre `[corchetes]` con la información real antes de publicar.
 
-- Foto: copia la imagen a `assets/img/` y pon la ruta en `candidato.foto`.
+- Fotos: copia las imágenes a `assets/img/` y pon la ruta en `candidato.foto` (retrato de la portada,
+  cuadrado o vertical, rostro en el tercio superior, JPG de ~1200 px y < 400 KB) y en
+  `candidato.fotoHistoria` (foto con la comunidad para "Su historia"; si se deja vacía se usa `foto`).
 - Colores de campaña: `colores.primario`, `colores.secundario`, `colores.oscuro`.
 - Fecha de la cuenta regresiva: `fechaEleccion` (verificar con la fuente oficial).
 - WhatsApp: `contacto.whatsapp` (solo dígitos, con 51).

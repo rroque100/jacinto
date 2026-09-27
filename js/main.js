@@ -64,16 +64,17 @@
   $$("[data-cargo]").forEach((el) => (el.textContent = c.cargo));
   $$("[data-lema]").forEach((el) => (el.textContent = c.lema));
   $$("[data-partido]").forEach((el) => (el.textContent = c.partido));
-  $$("[data-numero]").forEach((el) => (el.textContent = c.numero));
+  // Cómo votar: el partido no tiene número, se marca el símbolo (la X se dibuja sola)
+  const voteMark = () => `<span class="vote-mark">${emblem()}<svg class="vote-x" viewBox="0 0 100 100" aria-hidden="true"><path d="M18 18L82 82"/><path d="M82 18L18 82"/></svg></span>`;
+  $$("[data-vote]").forEach((el) => (el.innerHTML = voteMark()));
 
-  const portrait = (withBadge) => {
-    const inner = c.foto
-      ? `<div class="photo"><img src="${esc(c.foto)}" alt="${esc(fullName)}" loading="lazy"></div>`
-      : `<div class="portrait-emblem grow">${emblem()}</div>`;
-    return inner + (withBadge ? `<div class="badge-num">Marca el<b>${esc(c.numero)}</b></div>` : "");
-  };
-  $("#heroPortrait").innerHTML = portrait(true);
-  $("#bioPhoto").innerHTML = portrait(false);
+  // Fotos: retrato en la portada y foto con la comunidad en "Su historia" (sin foto se muestra el símbolo)
+  const photo = (src, alt) => src
+    ? `<div class="photo"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`
+    : `<div class="portrait-emblem grow">${emblem()}</div>`;
+  $("#heroPortrait").innerHTML = photo(c.foto, `${fullName}, candidato a alcalde de ${c.lugar}`) +
+    `<div class="vote-badge">${voteMark()}<span>Marca así<b>${esc(c.partido)}</b></span></div>`;
+  $("#bioPhoto").innerHTML = photo(c.fotoHistoria || c.foto, `${fullName} junto a su comunidad`);
 
   /* ---------- Título hero letra por letra ---------- */
   const heroTitle = $("#heroTitle");
