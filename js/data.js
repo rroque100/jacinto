@@ -15,7 +15,8 @@ window.SITE = {
     grito: "¡Venceremos!",                 // grito de campaña (banderola)
     cargo: "Candidato a Alcalde Distrital de Challhuahuacho",
     partido: "Venceremos",                 // el partido no tiene número: se vota marcando el símbolo
-    foto: "",                              // PORTADA: retrato del candidato, ej. "assets/img/candidato.jpg" (vacío = símbolo)
+    foto: "assets/img/jacinto.webp",       // PORTADA: foto del candidato (vacío = símbolo)
+    fotoSinFondo: true,                    // true si la foto de portada está recortada (fondo transparente)
     fotoHistoria: "",                      // SU HISTORIA: foto con la comunidad, ej. "assets/img/jacinto-comunidad.jpg" (vacío = usa "foto")
     banderola: "assets/img/banderola.png", // foto de la banderola de campaña
     lema: "En Challhuahuacho, la lucha de toda una vida al servicio de nuestro pueblo",

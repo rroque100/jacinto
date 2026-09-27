@@ -69,12 +69,19 @@
   $$("[data-vote]").forEach((el) => (el.innerHTML = voteMark()));
 
   // Fotos: retrato en la portada y foto con la comunidad en "Su historia" (sin foto se muestra el símbolo)
-  const photo = (src, alt) => src
-    ? `<div class="photo"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`
+  const photo = (src, alt, cls = "", eager = false) => src
+    ? `<div class="photo ${cls}"><img src="${esc(src)}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>`
     : `<div class="portrait-emblem grow">${emblem()}</div>`;
-  $("#heroPortrait").innerHTML = photo(c.foto, `${fullName}, candidato a alcalde de ${c.lugar}`) +
+  const cutout = c.foto && c.fotoSinFondo;
+  // Foto recortada: el candidato "sale" sobre el bloque rojo de la portada, sin marco
+  $("#heroPortrait").classList.toggle("hero__portrait--cutout", !!cutout);
+  $(".hero").classList.toggle("hero--cutout", !!cutout);
+  $("#heroPortrait").innerHTML = photo(c.foto, `${fullName}, candidato a alcalde de ${c.lugar}, con la bandera del Perú`, cutout ? "photo--cutout" : "", true) +
     `<div class="vote-badge">${voteMark()}<span>Marca así<b>${esc(c.partido)}</b></span></div>`;
-  $("#bioPhoto").innerHTML = photo(c.fotoHistoria || c.foto, `${fullName} junto a su comunidad`);
+  // "Su historia": foto con la comunidad; si no hay, la foto recortada sobre el símbolo del partido
+  $("#bioPhoto").innerHTML = c.fotoHistoria
+    ? photo(c.fotoHistoria, `${fullName} junto a su comunidad`)
+    : photo(c.foto, fullName, cutout ? "photo--symbol" : "");
 
   /* ---------- Título hero letra por letra ---------- */
   const heroTitle = $("#heroTitle");
