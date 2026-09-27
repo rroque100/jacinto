@@ -19,7 +19,7 @@ https://wa.me/51997197498?text=Hola%20Jacinto%2C%20quiero%20sumarme%20a%20la%20c
 El número y el mensaje se cambian en `js/data.js` (`contacto.whatsapp` y `contacto.mensajeWhatsapp`).
 
 ## Cómo editar el contenido
-Todo el texto, cifras, hitos, luchas, propuestas, testimonios, enlaces y colores están en **`js/data.js`**.
+Todo el texto, cifras, hitos, logros, caso, propuestas, redes y colores están en **`js/data.js`**.
 Reemplaza cada texto entre `[corchetes]` con la información real antes de publicar.
 
 - Foto: copia la imagen a `assets/img/` y pon la ruta en `candidato.foto`.
