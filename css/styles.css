@@ -284,6 +284,8 @@ a { color: inherit; }
 /* ---------- Historia ---------- */
 .historia__grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 70px; align-items: center; }
 .photo-frame { aspect-ratio: 1; transform-style: preserve-3d; }
+.photo-frame:has(.photo--historia) { aspect-ratio: 3 / 4; }
+.photo--historia img { object-position: 50% 40%; }
 .photo-frame .photo, .photo-frame .portrait-emblem { box-shadow: 16px 16px 0 var(--secondary); border-color: var(--dark); border-width: 5px; }
 .historia__text p { color: #333; }
 .quote {

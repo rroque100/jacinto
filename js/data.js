@@ -17,7 +17,7 @@ window.SITE = {
     partido: "Venceremos",                 // el partido no tiene número: se vota marcando el símbolo
     foto: "assets/img/jacinto.webp",       // PORTADA: foto del candidato (vacío = símbolo)
     fotoSinFondo: true,                    // true si la foto de portada está recortada (fondo transparente)
-    fotoHistoria: "",                      // SU HISTORIA: foto con la comunidad, ej. "assets/img/jacinto-comunidad.jpg" (vacío = usa "foto")
+    fotoHistoria: "assets/img/jacinto-asamblea.webp", // SU HISTORIA: foto con la comunidad (vacío = usa "foto")
     banderola: "assets/img/banderola.png", // foto de la banderola de campaña
     lema: "En Challhuahuacho, la lucha de toda una vida al servicio de nuestro pueblo",
     frasesRotativas: [

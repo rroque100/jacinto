@@ -80,7 +80,7 @@
     `<div class="vote-badge">${voteMark()}<span>Marca así<b>${esc(c.partido)}</b></span></div>`;
   // "Su historia": foto con la comunidad; si no hay, la foto recortada sobre el símbolo del partido
   $("#bioPhoto").innerHTML = c.fotoHistoria
-    ? photo(c.fotoHistoria, `${fullName} junto a su comunidad`)
+    ? photo(c.fotoHistoria, `${fullName} dirigiéndose a la asamblea comunal`, "photo--historia")
     : photo(c.foto, fullName, cutout ? "photo--symbol" : "");
 
   /* ---------- Título hero letra por letra ---------- */
