@@ -331,64 +331,17 @@
     else if (e.key === "ArrowRight") showMedia(mIndex + 1);
   });
 
-  /* ---------- Testimonios (slider) ---------- */
-  const track = $("#sliderTrack");
-  const dots = $("#sliderDots");
-  track.innerHTML = S.testimonios
-    .map((t) => `<div class="slide"><div class="slide__inner"><p>${esc(t.texto)}</p><div class="slide__author">${esc(t.autor)}</div><div class="slide__role">${esc(t.rol)}</div></div></div>`)
-    .join("");
-  dots.innerHTML = S.testimonios.map((_, i) => `<button aria-label="Testimonio ${i + 1}"></button>`).join("");
-  let slide = 0;
-  let slideTimer;
-  const goSlide = (n) => {
-    slide = (n + S.testimonios.length) % S.testimonios.length;
-    track.style.transform = `translateX(-${slide * 100}%)`;
-    $$("button", dots).forEach((d, i) => d.setAttribute("aria-current", i === slide));
-  };
-  const autoSlide = () => { clearInterval(slideTimer); if (!reduced) slideTimer = setInterval(() => goSlide(slide + 1), 6000); };
-  dots.addEventListener("click", (e) => {
-    const i = $$("button", dots).indexOf(e.target);
-    if (i >= 0) { goSlide(i); autoSlide(); }
-  });
-  let touchX = null;
-  track.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
-  track.addEventListener("touchend", (e) => {
-    if (touchX === null) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) > 40) { goSlide(slide + (dx < 0 ? 1 : -1)); autoSlide(); }
-    touchX = null;
-  });
-  goSlide(0);
-  autoSlide();
-
-  /* ---------- Contacto y formulario ---------- */
+  /* ---------- WhatsApp: botón flotante y botón del menú ---------- */
   const ct = S.contacto;
-  const links = [];
   // Enlace de WhatsApp (wa.me) con mensaje ya escrito
   const waLink = (text) => `https://wa.me/${ct.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
   if (ct.whatsapp) {
-    links.push(`<a class="btn btn--ghost btn--small" target="_blank" rel="noopener" href="${esc(waLink(ct.mensajeWhatsapp))}">WhatsApp</a>`);
+    $$("[data-wa]").forEach((a) => (a.href = waLink(ct.mensajeWhatsapp)));
     document.body.insertAdjacentHTML("beforeend",
       `<a class="wa-float" href="${esc(waLink(ct.mensajeWhatsapp))}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.4.7 4.7 1.9 6.7L3 29l6.9-2.2c1.9 1 4 1.6 6.1 1.6 7 0 12.7-5.7 12.7-12.7S23 3 16 3zm0 23.2c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4.1 1.3 1.3-4-.3-.4a10.4 10.4 0 0 1-1.6-5.7C5.5 9.9 10.2 5.3 16 5.3s10.5 4.6 10.5 10.4S21.8 26.2 16 26.2zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.9-1.7-2.2-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
         <span>¡Escríbenos!</span></a>`);
-  }
-  if (ct.correo) links.push(`<a class="btn btn--ghost btn--small" href="mailto:${esc(ct.correo)}">Correo</a>`);
-  if (ct.facebook) links.push(`<a class="btn btn--ghost btn--small" target="_blank" rel="noopener" href="${esc(ct.facebook)}">Facebook</a>`);
-  if (ct.tiktok) links.push(`<a class="btn btn--ghost btn--small" target="_blank" rel="noopener" href="${esc(ct.tiktok)}">TikTok</a>`);
-  $("#contactLinks").innerHTML = links.join("");
-
-  $("#joinForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const fd = new FormData(e.target);
-    const msg = `Hola, soy ${fd.get("nombre")} de ${fd.get("zona")} y quiero sumarme a la campaña de ${fullName}.`;
-    if (ct.whatsapp) {
-      window.open(waLink(msg), "_blank", "noopener");
-    }
-    $("#formMsg").textContent = `¡Gracias, ${fd.get("nombre")}! Juntos seguimos luchando.`;
-    confetti();
-    e.target.reset();
-  });
+  } else $$("[data-wa]").forEach((a) => a.remove());
 
   /* ---------- Cuenta regresiva ---------- */
   const cd = $("#countdown");
@@ -540,25 +493,6 @@
   canvas.parentElement.addEventListener("pointerleave", () => (mouse.x = mouse.y = -999));
   new IntersectionObserver(([en]) => { const was = heroVisible; heroVisible = en.isIntersecting; if (heroVisible && !was) draw(); }).observe(canvas);
   draw();
-
-  /* ---------- Confeti ---------- */
-  function confetti() {
-    if (reduced) return;
-    const cv = document.createElement("canvas");
-    cv.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:95";
-    cv.width = innerWidth; cv.height = innerHeight;
-    document.body.appendChild(cv);
-    const cx = cv.getContext("2d");
-    const cols = [red, accent, "#111111"];
-    const bits = Array.from({ length: 160 }, () => ({ x: innerWidth / 2, y: innerHeight * 0.6, vx: (Math.random() - 0.5) * 16, vy: -Math.random() * 18 - 6, s: Math.random() * 8 + 4, r: Math.random() * 6, c: cols[Math.floor(Math.random() * 3)] }));
-    let f = 0;
-    const loop = () => {
-      cx.clearRect(0, 0, cv.width, cv.height);
-      bits.forEach((b) => { b.vy += 0.5; b.x += b.vx; b.y += b.vy; b.r += 0.2; cx.save(); cx.translate(b.x, b.y); cx.rotate(b.r); cx.fillStyle = b.c; cx.fillRect(-b.s / 2, -b.s / 4, b.s, b.s / 2); cx.restore(); });
-      if (++f < 140) requestAnimationFrame(loop); else cv.remove();
-    };
-    loop();
-  }
 
   /* ---------- Hojas que caen en la portada ---------- */
   if (!reduced) {

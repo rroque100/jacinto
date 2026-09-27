@@ -12,8 +12,7 @@ hojas está redibujado en SVG en `js/main.js` (función `emblem`) para poder ani
 precargador, la barra de navegación, la portada, la historia y el pie.
 
 ## WhatsApp
-Enlace directo (wa.me) con mensaje ya escrito, usado por el botón flotante, el botón de contacto y el
-formulario "Únete":
+Enlace directo (wa.me) con mensaje ya escrito, usado por el botón flotante y el botón "Escríbenos" del menú:
 
 https://wa.me/51997197498?text=Hola%20Jacinto%2C%20quiero%20sumarme%20a%20la%20campa%C3%B1a%20en%20Challhuahuacho.%20%C2%A1Venceremos!
 
@@ -26,7 +25,7 @@ Reemplaza cada texto entre `[corchetes]` con la información real antes de publi
 - Foto: copia la imagen a `assets/img/` y pon la ruta en `candidato.foto`.
 - Colores de campaña: `colores.primario`, `colores.secundario`, `colores.oscuro`.
 - Fecha de la cuenta regresiva: `fechaEleccion` (verificar con la fuente oficial).
-- WhatsApp del formulario "Únete": `contacto.whatsapp` (solo dígitos, con 51).
+- WhatsApp: `contacto.whatsapp` (solo dígitos, con 51).
 
 ## Ver localmente
 Abre `index.html` en el navegador, o sirve la carpeta: `python3 -m http.server 8000`.
@@ -37,5 +36,5 @@ Es un sitio estático: funciona en GitHub Pages, Netlify, Vercel o cualquier hos
 ## Animaciones incluidas
 Preloader, título animado letra por letra, red de partículas interactiva, texto tipo máquina de escribir,
 cuenta regresiva, marquesina, contadores animados, revelado al hacer scroll, línea de tiempo que se dibuja,
-tarjetas con inclinación 3D y brillo, botones magnéticos, pestañas de propuestas, carrusel de testimonios
-(con deslizamiento táctil), modal, confeti y barra de progreso. Respeta `prefers-reduced-motion`.
+tarjetas con inclinación 3D y brillo, botones magnéticos, plan de gobierno por ejes con buscador,
+reproductor de redes integrado, modal y barra de progreso. Respeta `prefers-reduced-motion`.

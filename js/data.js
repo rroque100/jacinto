@@ -233,17 +233,8 @@ window.SITE = {
     { tipo: "video",    titulo: "Video en Facebook",        url: "https://www.facebook.com/share/v/1CNhFEqb4G/" }
   ],
 
-  testimonios: [
-    { texto: "[Testimonio de un vecino o dirigente.]", autor: "[Nombre]", rol: "[Comunidad / organización]" },
-    { texto: "[Testimonio de una madre de familia.]", autor: "[Nombre]", rol: "[Comunidad / organización]" },
-    { texto: "[Testimonio de un joven.]", autor: "[Nombre]", rol: "[Comunidad / organización]" }
-  ],
-
   contacto: {
     whatsapp: "51997197498",   // solo dígitos con código de país (vacío = oculto)
     mensajeWhatsapp: "Hola Jacinto, quiero sumarme a la campaña en Challhuahuacho. ¡Venceremos!",
-    correo: "",            // ej: "campana@ejemplo.pe"
-    facebook: "",          // URL de la página oficial
-    tiktok: ""             // URL del perfil
   }
 };
