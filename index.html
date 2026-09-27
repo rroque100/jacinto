@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jacinto · Una vida de lucha social</title>
+  <meta name="description" content="Resumen de vida, trayectoria y lucha social del candidato Jacinto.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="is-loading">
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__name" data-name></div>
+    <div class="preloader__bar"><span></span></div>
+  </div>
+
+  <div class="progress" id="progress"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <!-- Navegación -->
+  <header class="nav" id="nav">
+    <a href="#inicio" class="nav__logo" data-fullname-short></a>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav__links" id="navLinks">
+      <a href="#historia">Historia</a>
+      <a href="#trayectoria">Trayectoria</a>
+      <a href="#luchas">Luchas</a>
+      <a href="#propuestas">Propuestas</a>
+      <a href="#redes">En redes</a>
+      <a href="#unete" class="btn btn--small magnetic">Únete</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <canvas id="particles" class="hero__canvas" aria-hidden="true"></canvas>
+      <div class="hero__blob hero__blob--a" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--b" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="hero__kicker reveal" data-cargo></p>
+        <h1 class="hero__title" id="heroTitle" aria-label=""></h1>
+        <p class="hero__typed reveal">Toda una vida como <span id="typed" class="typed"></span><span class="caret">|</span></p>
+        <p class="hero__lema reveal" data-lema></p>
+        <div class="hero__cta reveal">
+          <a href="#historia" class="btn magnetic">Conoce su historia</a>
+          <a href="#unete" class="btn btn--ghost magnetic">Súmate a la causa</a>
+        </div>
+        <div class="countdown reveal" id="countdown" aria-live="polite"></div>
+      </div>
+      <div class="hero__portrait reveal" id="heroPortrait"></div>
+      <a href="#cifras" class="scroll-hint" aria-label="Bajar"><span></span></a>
+    </section>
+
+    <!-- Marquesina -->
+    <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marquee"></div></div>
+
+    <!-- CIFRAS -->
+    <section class="stats" id="cifras">
+      <div class="container stats__grid" id="stats"></div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section class="section historia" id="historia">
+      <div class="container historia__grid">
+        <div class="historia__media reveal-left">
+          <div class="photo-frame tilt" id="bioPhoto"></div>
+        </div>
+        <div class="historia__text">
+          <span class="eyebrow reveal">Su historia</span>
+          <h2 class="section__title reveal" id="bioTitle"></h2>
+          <div id="bioText"></div>
+          <blockquote class="quote reveal" id="bioQuote"></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAYECTORIA -->
+    <section class="section trayectoria" id="trayectoria">
+      <div class="container">
+        <span class="eyebrow reveal">Trayectoria</span>
+        <h2 class="section__title reveal">Una vida marcada por la lucha</h2>
+        <div class="timeline" id="timeline">
+          <div class="timeline__line"><span id="timelineFill"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LUCHAS -->
+    <section class="section luchas" id="luchas">
+      <div class="container">
+        <span class="eyebrow reveal">Lucha social</span>
+        <h2 class="section__title reveal">Causas que ha defendido</h2>
+        <p class="section__lead reveal">Toca cada tarjeta para conocer la historia completa.</p>
+        <div class="cards" id="luchasGrid"></div>
+      </div>
+    </section>
+
+    <!-- PROPUESTAS -->
+    <section class="section propuestas" id="propuestas">
+      <div class="container">
+        <span class="eyebrow reveal">Plan de gobierno</span>
+        <h2 class="section__title reveal">Propuestas</h2>
+        <div class="tabs reveal" id="tabs" role="tablist"></div>
+        <div class="proposals" id="proposals"></div>
+      </div>
+    </section>
+
+    <!-- REDES -->
+    <section class="section redes" id="redes">
+      <div class="container">
+        <span class="eyebrow reveal">En redes</span>
+        <h2 class="section__title reveal">Míralo en acción</h2>
+        <div class="social-grid" id="socialGrid"></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="section testimonios" id="testimonios">
+      <div class="container">
+        <span class="eyebrow reveal">Testimonios</span>
+        <h2 class="section__title reveal">Lo que dice el pueblo</h2>
+        <div class="slider reveal" id="slider">
+          <div class="slider__track" id="sliderTrack"></div>
+          <div class="slider__dots" id="sliderDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÚNETE -->
+    <section class="section unete" id="unete">
+      <div class="container unete__box reveal">
+        <h2 class="section__title">Esta lucha también es tuya</h2>
+        <p class="section__lead">Súmate como voluntario, personero o difusor en tu barrio.</p>
+        <form class="form" id="joinForm">
+          <input type="text" name="nombre" placeholder="Tu nombre" required>
+          <input type="text" name="zona" placeholder="Tu barrio / comunidad" required>
+          <button class="btn magnetic" type="submit">Quiero sumarme</button>
+        </form>
+        <p class="form__msg" id="formMsg" role="status"></p>
+        <div class="unete__contact" id="contactLinks"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p><strong data-fullname></strong> · <span data-partido></span></p>
+      <p class="footer__vote">Marca el <span data-numero></span></p>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel">
+      <button class="modal__close" data-close aria-label="Cerrar">×</button>
+      <div class="modal__icon" id="modalIcon"></div>
+      <h3 id="modalTitle"></h3>
+      <p id="modalText"></p>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
