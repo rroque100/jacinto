@@ -13,7 +13,7 @@ window.SITE = {
     apellido: "Lima Lucas",
     lugar: "Challhuahuacho",
     grito: "¡Venceremos!",                 // grito de campaña (banderola)
-    cargo: "Candidato a la Alcaldía de Challhuahuacho",   // CONFIRMAR el cargo exacto
+    cargo: "Candidato a Alcalde Distrital de Challhuahuacho",
     partido: "[Nombre del partido o movimiento]",
     numero: "[N.º]",                       // número en la cédula
     foto: "",                              // ej: "assets/img/candidato.jpg" (vacío = logo de las hojas)
