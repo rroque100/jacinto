@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Súmate · Jacinto Lima Lucas · ¡Venceremos!</title>
+  <meta name="description" content="Déjanos tus datos y súmate a la campaña de Jacinto Lima Lucas en Challhuahuacho. ¡Venceremos!">
+  <meta name="theme-color" content="#be1623">
+  <link rel="canonical" href="https://jacinto-lima.vercel.app/unete">
+  <!-- Vista previa al compartir / anuncios de Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jacinto-lima.vercel.app/unete">
+  <meta property="og:title" content="Súmate a la campaña de Jacinto Lima Lucas · ¡Venceremos!">
+  <meta property="og:description" content="Déjanos tus datos y te contactamos para sumarte en Challhuahuacho.">
+  <meta property="og:image" content="https://jacinto-lima.vercel.app/assets/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_PE">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23be1623'/%3E%3Ccircle cx='32' cy='32' r='24' fill='%23fff'/%3E%3Cpath d='M32 14c9 8 9 22 0 32-9-10-9-24 0-32z' fill='%2300b050' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400..800&display=swap" media="print" onload="this.media='all'">
+  <style>
+    :root {
+      --primary: #be1623; --primary-dark: #8a0f18; --secondary: #00b050;
+      --dark: #111; --paper: #fff; --cream: #f5f3ee; --muted: #5b5b5b; --line: #e4e1da;
+      --error: #b00020; --radius: 16px;
+      --display: "Anton", "Arial Narrow", Impact, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: var(--cream); color: var(--dark); line-height: 1.5; }
+    a { color: inherit; }
+
+    .top { background: var(--primary); color: #fff; padding: 28px 16px 90px; text-align: center; }
+    .top__logo { width: 64px; height: 64px; margin: 0 auto 12px; background: #fff; border-radius: 14px; padding: 6px; }
+    .top__logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .top h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(2rem, 8vw, 3rem); line-height: 1.05; margin: 0 0 8px; letter-spacing: .01em; }
+    .top p { margin: 0 auto; max-width: 30rem; font-size: 1.05rem; opacity: .95; }
+
+    .card { width: min(560px, 100% - 32px); margin: -64px auto 32px; background: var(--paper); border-radius: var(--radius); box-shadow: 0 20px 50px #0000001f; padding: 24px 20px; }
+    @media (min-width: 600px) { .card { padding: 32px; } }
+
+    .field { margin-bottom: 18px; }
+    .field label, .field legend { display: block; font-weight: 700; margin-bottom: 6px; font-size: .95rem; }
+    .field small.opt { font-weight: 400; color: var(--muted); }
+    .field input, .field select {
+      width: 100%; font: inherit; font-size: 1rem; padding: 13px 14px;
+      border: 2px solid var(--line); border-radius: 10px; background: #fff; color: var(--dark);
+      transition: border-color .2s;
+    }
+    .field input:focus, .field select:focus { outline: none; border-color: var(--primary); }
+    .field.invalid input, .field.invalid select { border-color: var(--error); }
+    .field .err { display: none; color: var(--error); font-size: .85rem; margin-top: 4px; }
+    .field.invalid .err { display: block; }
+    .row { display: grid; gap: 0 14px; }
+    @media (min-width: 520px) { .row { grid-template-columns: 1fr 1fr; } }
+
+    fieldset.field { border: 0; padding: 0; margin: 0 0 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips label { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; margin: 0; padding: 8px 12px; border: 2px solid var(--line); border-radius: 999px; cursor: pointer; font-size: .92rem; white-space: nowrap; }
+    .chips input { accent-color: var(--primary); margin: 0; }
+    .chips label:has(input:checked) { border-color: var(--primary); background: #be16230d; }
+
+    .consent { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; color: var(--muted); margin: 6px 0 20px; }
+    .consent input { width: 20px; height: 20px; flex: none; margin-top: 1px; accent-color: var(--primary); }
+    .consent.invalid { color: var(--error); }
+
+    .btn { display: block; width: 100%; border: 0; border-radius: 999px; background: var(--primary); color: #fff; font: inherit; font-weight: 800; font-size: 1.1rem; padding: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: .03em; text-align: center; text-decoration: none; }
+    .btn:hover { background: var(--primary-dark); }
+    .btn[disabled] { opacity: .6; cursor: wait; }
+    .btn--wa { background: #1faa53; margin-top: 12px; }
+    .btn--wa:hover { background: #178a43; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .msg { margin-top: 14px; font-size: .92rem; color: var(--error); text-align: center; }
+
+    .done { text-align: center; }
+    .done__icon { width: 72px; height: 72px; border-radius: 50%; background: var(--secondary); color: #fff; display: grid; place-items: center; margin: 0 auto 14px; font-size: 2.2rem; }
+    .done h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 2rem; margin: 0 0 6px; }
+    .done p { color: var(--muted); margin: 0 0 18px; }
+    .grito { font-style: italic; font-weight: 800; color: var(--primary); font-size: 1.3rem; }
+
+    footer { text-align: center; font-size: .85rem; color: var(--muted); padding: 0 16px 32px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top__logo"><img src="../assets/img/simbolo.png" alt="Símbolo del partido Venceremos" width="52" height="52"></div>
+    <h1>Súmate a Jacinto</h1>
+    <p>Déjanos tus datos y te contactaremos para construir juntos el nuevo Challhuahuacho.</p>
+  </header>
+
+  <main class="card">
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="nombre">Nombres y apellidos</label>
+        <input id="nombre" name="nombre" autocomplete="name" required minlength="3" maxlength="80" placeholder="Ej.: María Quispe Huamán">
+        <div class="err">Escribe tu nombre completo.</div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="celular">Celular / WhatsApp</label>
+          <input id="celular" name="celular" type="tel" inputmode="numeric" autocomplete="tel-national" required pattern="9\d{8}" maxlength="9" placeholder="9XX XXX XXX">
+          <div class="err">Debe tener 9 dígitos y empezar con 9.</div>
+        </div>
+        <div class="field">
+          <label for="dni">DNI <small class="opt">(opcional)</small></label>
+          <input id="dni" name="dni" inputmode="numeric" pattern="\d{8}" maxlength="8" placeholder="8 dígitos">
+          <div class="err">El DNI tiene 8 dígitos.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="comunidad">Comunidad / barrio</label>
+          <input id="comunidad" name="comunidad" required maxlength="80" placeholder="Ej.: Tambulla">
+          <div class="err">Indica tu comunidad o barrio.</div>
+        </div>
+        <div class="field">
+          <label for="edad">Edad <small class="opt">(opcional)</small></label>
+          <select id="edad" name="edad">
+            <option value="">Elige</option>
+            <option>18 – 25</option>
+            <option>26 – 35</option>
+            <option>36 – 50</option>
+            <option>51 – 65</option>
+            <option>Más de 65</option>
+          </select>
+        </div>
+      </div>
+
+      <fieldset class="field">
+        <legend>¿Cómo quieres apoyar? <small class="opt">(opcional)</small></legend>
+        <div class="chips">
+          <label><input type="checkbox" name="apoyo" value="Voluntario"> Voluntario</label>
+          <label><input type="checkbox" name="apoyo" value="Personero"> Personero</label>
+          <label><input type="checkbox" name="apoyo" value="Difusión en redes"> Difundir en redes</label>
+          <label><input type="checkbox" name="apoyo" value="Recibir información"> Recibir información</label>
+        </div>
+      </fieldset>
+
+      <!-- Trampa anti-spam: las personas no la ven -->
+      <div class="hp" aria-hidden="true"><label>No llenar <input name="empresa" tabindex="-1" autocomplete="off"></label></div>
+
+      <label class="consent" id="consentWrap">
+        <input type="checkbox" id="consent" name="consentimiento" required>
+        <span>Acepto que la campaña de Jacinto Lima Lucas use mis datos para contactarme por llamada o WhatsApp (Ley N.° 29733 de Protección de Datos Personales).</span>
+      </label>
+
+      <button class="btn" id="send" type="submit">¡Quiero sumarme!</button>
+      <p class="msg" id="msg" role="alert" hidden></p>
+      <a class="btn btn--wa" id="waFallback" target="_blank" rel="noopener" hidden>Enviar por WhatsApp</a>
+    </form>
+
+    <div class="done" id="done" hidden>
+      <div class="done__icon" aria-hidden="true">✓</div>
+      <h2>¡Gracias, <span id="doneName"></span>!</h2>
+      <p>Ya eres parte del equipo. Pronto te escribiremos.</p>
+      <p class="grito">¡Venceremos!</p>
+      <a class="btn" href="../">Conoce a Jacinto</a>
+    </div>
+  </main>
+
+  <footer>Jacinto Lima Lucas · Alcalde de Challhuahuacho · Partido Venceremos</footer>
+
+  <script>
+    /* ===== Configuración ===== */
+    // ID del Píxel de Meta (Administrador de eventos). Vacío = sin píxel.
+    const META_PIXEL_ID = "";
+    // WhatsApp de respaldo si el registro no se puede guardar
+    const WHATSAPP = "51997197498";
+
+    /* ===== Píxel de Meta: PageView al entrar, Lead al registrarse ===== */
+    if (META_PIXEL_ID) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq("init", META_PIXEL_ID);
+      fbq("track", "PageView");
+    }
+
+    const $ = (s) => document.querySelector(s);
+    const form = $("#form"), send = $("#send"), msg = $("#msg"), wa = $("#waFallback");
+
+    // Origen del visitante (parámetros UTM y fbclid que agrega Meta Ads)
+    const params = new URLSearchParams(location.search);
+    const origen = {};
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((k) => {
+      if (params.get(k)) origen[k] = params.get(k).slice(0, 200);
+    });
+
+    // Solo números en celular y DNI
+    ["#celular", "#dni"].forEach((id) => $(id).addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/\D/g, "");
+    }));
+    form.addEventListener("input", (e) => {
+      const f = e.target.closest(".field");
+      if (f && e.target.checkValidity()) f.classList.remove("invalid");
+      if (e.target.id === "consent") $("#consentWrap").classList.remove("invalid");
+    });
+
+    const validate = () => {
+      let first = null;
+      form.querySelectorAll("input[name]:not([type=checkbox]), select").forEach((el) => {
+        el.value = el.value.trim();
+        const ok = el.checkValidity();
+        el.closest(".field")?.classList.toggle("invalid", !ok);
+        if (!ok && !first) first = el;
+      });
+      const consent = $("#consent");
+      $("#consentWrap").classList.toggle("invalid", !consent.checked);
+      if (!consent.checked && !first) first = consent;
+      if (first) first.focus();
+      return !first;
+    };
+
+    const collect = () => {
+      const fd = new FormData(form);
+      return {
+        nombre: fd.get("nombre"),
+        celular: fd.get("celular"),
+        dni: fd.get("dni"),
+        comunidad: fd.get("comunidad"),
+        edad: fd.get("edad"),
+        apoyo: fd.getAll("apoyo").join(", "),
+        empresa: fd.get("empresa"),
+        ...origen
+      };
+    };
+
+    const waText = (d) => [
+      "Hola Jacinto, quiero sumarme a la campaña. ¡Venceremos!",
+      `Nombre: ${d.nombre}`, `Celular: ${d.celular}`, d.dni && `DNI: ${d.dni}`,
+      `Comunidad: ${d.comunidad}`, d.edad && `Edad: ${d.edad}`, d.apoyo && `Apoyo: ${d.apoyo}`
+    ].filter(Boolean).join("\n");
+
+    const showDone = (d) => {
+      $("#doneName").textContent = d.nombre.split(" ")[0];
+      form.hidden = true;
+      $("#done").hidden = false;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (window.fbq) fbq("track", "Lead", { content_name: "Registro simpatizante" });
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.hidden = true; wa.hidden = true;
+      if (!validate()) return;
+      const data = collect();
+      send.disabled = true; send.textContent = "Enviando…";
+      try {
+        const res = await fetch("/api/registro", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error(res.status);
+        showDone(data);
+      } catch {
+        // Si no se pudo guardar, no se pierde el contacto: se envía por WhatsApp
+        msg.textContent = "No pudimos guardar tu registro. Envíanos tus datos por WhatsApp:";
+        msg.hidden = false;
+        wa.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waText(data))}`;
+        wa.hidden = false;
+      } finally {
+        send.disabled = false; send.textContent = "¡Quiero sumarme!";
+      }
+    });
+  </script>
+</body>
+</html>
