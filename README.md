@@ -85,3 +85,10 @@ Si el registro no se puede guardar, la página ofrece enviar los mismos datos po
 ### Píxel de Meta
 Pon el ID del píxel en `META_PIXEL_ID` (al inicio del `<script>` de `unete/index.html`).
 Registra `PageView` al entrar y `Lead` cuando la persona se registra (úsalo como evento de conversión).
+
+### Política de privacidad (`/privacidad`)
+`privacidad/index.html` explica qué datos se recogen, para qué, con quién se comparten, cuánto tiempo se guardan
+y cómo ejercer los derechos ARCO (Ley 29733). Está enlazada desde la casilla de consentimiento del formulario
+y el pie de la web. URL para Meta Ads (formularios de clientes potenciales / configuración del anuncio):
+`https://jacinto-lima.vercel.app/privacidad` (también `/politica-de-privacidad`).
+Completa los datos entre [corchetes] del punto 1 (responsable, DNI/RUC, dirección y correo) antes de publicar anuncios.

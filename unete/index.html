@@ -65,6 +65,7 @@
     .consent { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; color: var(--muted); margin: 6px 0 20px; }
     .consent input { width: 20px; height: 20px; flex: none; margin-top: 1px; accent-color: var(--primary); }
     .consent.invalid { color: var(--error); }
+    .consent a { color: var(--primary); font-weight: 600; }
 
     .btn { display: block; width: 100%; border: 0; border-radius: 999px; background: var(--primary); color: #fff; font: inherit; font-weight: 800; font-size: 1.1rem; padding: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: .03em; text-align: center; text-decoration: none; }
     .btn:hover { background: var(--primary-dark); }
@@ -146,7 +147,7 @@
 
       <label class="consent" id="consentWrap">
         <input type="checkbox" id="consent" name="consentimiento" required>
-        <span>Acepto que la campaña de Jacinto Lima Lucas use mis datos para contactarme por llamada o WhatsApp (Ley N.° 29733 de Protección de Datos Personales).</span>
+        <span>Acepto que la campaña de Jacinto Lima Lucas use mis datos para contactarme por llamada o WhatsApp según la <a href="/privacidad" target="_blank" rel="noopener">Política de Privacidad</a> (Ley N.° 29733).</span>
       </label>
 
       <button class="btn" id="send" type="submit">¡Quiero sumarme!</button>
@@ -163,7 +164,7 @@
     </div>
   </main>
 
-  <footer>Jacinto Lima Lucas · Alcalde de Challhuahuacho · Partido Venceremos</footer>
+  <footer>Jacinto Lima Lucas · Alcalde de Challhuahuacho · Partido Venceremos<br><a href="/privacidad">Política de Privacidad</a></footer>
 
   <script>
     /* ===== Configuración ===== */
