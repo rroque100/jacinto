@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/sumate", "destination": "/unete", "permanent": true },
+    { "source": "/registro", "destination": "/unete", "permanent": true }
+  ]
+}

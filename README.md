@@ -47,3 +47,41 @@ reproductor de redes integrado, modal y barra de progreso.
 - Fotos en WebP con versión liviana para celular (`-800` / `-720`) mediante `srcset`.
 - Scripts diferidos, fuentes sin bloqueo (Inter variable) y animaciones que se pausan fuera de pantalla.
 - Vista previa al compartir (Open Graph): `assets/img/og.jpg` (1200 × 630). Respeta `prefers-reduced-motion`.
+
+## Formulario de registro para Meta Ads (`/unete`)
+Página ligera e independiente (`unete/index.html`) para recolectar datos de simpatizantes:
+nombres y apellidos, celular/WhatsApp, DNI (opcional), comunidad o barrio, rango de edad (opcional),
+forma de apoyo y consentimiento de datos (Ley 29733). Guarda también el origen del anuncio
+(`utm_*` y `fbclid`).
+
+**URL amigable para el anuncio:** `https://jacinto-lima.vercel.app/unete`
+(`/sumate` y `/registro` redirigen a la misma página).
+
+URL recomendada en Meta Ads (campo *Sitio web*), con el seguimiento en *Parámetros de URL*:
+
+```
+https://jacinto-lima.vercel.app/unete
+utm_source=facebook&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}
+```
+
+### Dónde se guardan los datos (Google Sheets)
+1. Crea una hoja de Google con los encabezados en la fila 1:
+   `fecha, nombre, celular, dni, comunidad, edad, apoyo, utm_source, utm_medium, utm_campaign, utm_content, utm_term, fbclid`
+2. *Extensiones → Apps Script* y pega:
+   ```js
+   function doPost(e) {
+     const d = JSON.parse(e.postData.contents);
+     const sh = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+     const cols = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+     sh.appendRow(cols.map((c) => d[c] || ""));
+     return ContentService.createTextOutput("ok");
+   }
+   ```
+3. *Implementar → Nueva implementación → Aplicación web*, acceso: "Cualquier usuario". Copia la URL.
+4. En Vercel: *Settings → Environment Variables* → `REGISTRO_WEBHOOK_URL` = esa URL, y vuelve a desplegar.
+
+Si el registro no se puede guardar, la página ofrece enviar los mismos datos por WhatsApp para no perder el contacto.
+
+### Píxel de Meta
+Pon el ID del píxel en `META_PIXEL_ID` (al inicio del `<script>` de `unete/index.html`).
+Registra `PageView` al entrar y `Lead` cuando la persona se registra (úsalo como evento de conversión).
